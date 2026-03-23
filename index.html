@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Island Garden Hotel — Nassau, Bahamas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sand: #F5EFE4;
+    --white: #FDFCFA;
+    --ocean: #1B6B7B;
+    --ocean-deep: #0D4A57;
+    --ocean-light: #4A9CAD;
+    --coral: #C8634A;
+    --coral-light: #E8876E;
+    --text: #1A1A1A;
+    --text-mid: #4A4A4A;
+    --text-light: #8A8A8A;
+    --border: rgba(27,107,123,0.15);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Jost', sans-serif; background: var(--white); color: var(--text); overflow-x: hidden; }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    background: rgba(253,252,250,0.96);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+    transition: box-shadow 0.3s;
+  }
+  nav.scrolled { box-shadow: 0 2px 24px rgba(0,0,0,0.09); }
+
+  .nav-top {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px; height: 82px;
+  }
+
+  /* Logo */
+  .nav-logo-wrap { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+  .nav-logo-mark {
+    width: 54px; height: 54px;
+    background: var(--ocean-deep);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .nav-logo-mark svg { width: 34px; height: 34px; }
+  .nav-logo-text { line-height: 1.2; }
+  .nav-logo-name { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 500; color: var(--ocean-deep); letter-spacing: 0.03em; display: block; }
+  .nav-logo-sub { font-size: 0.67rem; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-light); display: block; margin-top: 2px; }
+
+  /* Desktop links */
+  .nav-links { display: flex; gap: 30px; align-items: center; }
+  .nav-links a { font-size: 0.77rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-mid); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--ocean); }
+  .btn-book-nav { background: var(--ocean); color: white; padding: 10px 22px; border-radius: 2px; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; transition: background 0.2s, transform 0.15s; white-space: nowrap; }
+  .btn-book-nav:hover { background: var(--ocean-deep); transform: translateY(-1px); }
+
+  /* Hamburger */
+  .nav-hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 40px; height: 40px; background: none; border: none; cursor: pointer; padding: 4px; }
+  .nav-hamburger span { display: block; height: 2px; background: var(--ocean-deep); border-radius: 2px; transition: transform 0.3s, opacity 0.3s; transform-origin: center; }
+  nav.menu-open .nav-hamburger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  nav.menu-open .nav-hamburger span:nth-child(2) { opacity: 0; }
+  nav.menu-open .nav-hamburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* Mobile drawer */
+  .nav-drawer { display: none; flex-direction: column; background: var(--white); border-top: 1px solid var(--border); padding: 20px 28px 32px; }
+  .nav-drawer.open { display: flex; }
+  .nav-drawer a { font-size: 0.95rem; font-weight: 400; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text); text-decoration: none; padding: 15px 0; border-bottom: 1px solid var(--border); transition: color 0.2s; }
+  .nav-drawer a:hover { color: var(--ocean); }
+  .nav-drawer .btn-book-drawer { margin-top: 20px; background: var(--coral); color: white; padding: 16px 24px; text-align: center; border-radius: 2px; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; border-bottom: none; transition: background 0.2s; }
+  .nav-drawer .btn-book-drawer:hover { background: var(--coral-light); }
+
+  /* ─── HERO ─── */
+  .hero { height: 100vh; min-height: 560px; position: relative; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(13,74,87,0.18) 0%, rgba(13,74,87,0.04) 40%, rgba(13,74,87,0.64) 100%),
+      url('https://h-img1.us2.cloudbeds.com/uploads/32901098274951/715b5d8d-707a-4cde-90a0-f26a55d85a71_gallery~~68193bef6fef2.jpeg') center/cover no-repeat;
+    animation: heroZoom 20s ease-in-out infinite alternate;
+  }
+  @keyframes heroZoom { from { transform: scale(1.04); } to { transform: scale(1.0); } }
+  .hero-content { position: relative; z-index: 2; padding: 0 72px 80px; animation: fadeUp 1.2s ease both; }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
+  .hero-eyebrow { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.26em; text-transform: uppercase; color: rgba(255,255,255,0.72); margin-bottom: 14px; }
+  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.8rem, 7vw, 5.8rem); font-weight: 300; color: white; line-height: 1.06; margin-bottom: 22px; }
+  .hero-title em { font-style: italic; color: #A8D8E0; }
+  .hero-sub { font-size: 1rem; font-weight: 300; color: rgba(255,255,255,0.78); max-width: 460px; line-height: 1.75; margin-bottom: 36px; }
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-primary { background: var(--coral); color: white; padding: 15px 34px; border-radius: 2px; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; display: inline-block; transition: background 0.2s, transform 0.15s, box-shadow 0.2s; }
+  .btn-primary:hover { background: var(--coral-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(200,99,74,0.35); }
+  .btn-ghost { border: 1.5px solid rgba(255,255,255,0.6); color: white; padding: 13px 30px; border-radius: 2px; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; display: inline-block; transition: border-color 0.2s, background 0.2s; }
+  .btn-ghost:hover { border-color: white; background: rgba(255,255,255,0.1); }
+
+  /* ─── BOOKING BAR ─── */
+  .booking-bar { background: var(--ocean-deep); padding: 24px 48px; }
+  .booking-bar-inner { max-width: 1100px; width: 100%; margin: 0 auto; display: flex; gap: 1px; align-items: stretch; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; }
+  .bb-field { flex: 1; padding: 14px 18px; background: rgba(255,255,255,0.06); display: flex; flex-direction: column; gap: 4px; transition: background 0.2s; min-width: 0; }
+  .bb-field:hover { background: rgba(255,255,255,0.1); }
+  .bb-label { font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+  .bb-input { background: none; border: none; outline: none; color: white; font-family: 'Jost', sans-serif; font-size: 0.88rem; font-weight: 400; cursor: pointer; width: 100%; }
+  .bb-input::placeholder { color: rgba(255,255,255,0.55); }
+  .bb-btn { background: var(--coral); color: white; border: none; padding: 0 32px; font-family: 'Jost', sans-serif; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; white-space: nowrap; min-height: 56px; }
+  .bb-btn:hover { background: var(--coral-light); }
+  .direct-badge { text-align: center; background: var(--ocean); padding: 10px; font-size: 0.7rem; color: rgba(255,255,255,0.78); letter-spacing: 0.06em; }
+  .direct-badge strong { color: white; }
+
+  /* ─── TRUST BAR ─── */
+  .trust-bar { background: var(--ocean); padding: 20px 48px; display: flex; justify-content: center; gap: 48px; align-items: center; flex-wrap: wrap; }
+  .trust-item { display: flex; align-items: center; gap: 8px; color: rgba(255,255,255,0.85); font-size: 0.8rem; }
+  .trust-item span { font-size: 1.1rem; }
+
+  /* ─── SHARED ─── */
+  .section-eyebrow { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ocean); margin-bottom: 14px; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.9rem, 4vw, 3rem); font-weight: 300; line-height: 1.15; color: var(--text); margin-bottom: 22px; }
+  .section-title em { font-style: italic; color: var(--ocean); }
+  .section-body { font-size: 0.97rem; font-weight: 300; line-height: 1.82; color: var(--text-mid); max-width: 540px; }
+
+  /* ─── ABOUT ─── */
+  .about-section { padding: 96px 72px; }
+  .about { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; max-width: 1200px; margin: 0 auto; }
+  .about-img-wrap { position: relative; }
+  .about-img { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 2px; display: block; }
+  .about-img-accent { position: absolute; bottom: -24px; right: -24px; width: 52%; aspect-ratio: 1; object-fit: cover; border-radius: 2px; border: 6px solid var(--white); box-shadow: 0 8px 32px rgba(0,0,0,0.12); }
+  .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 36px; }
+  .stat-card { background: var(--sand); padding: 22px; border-radius: 2px; }
+  .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 300; color: var(--ocean-deep); line-height: 1; }
+  .stat-label { font-size: 0.7rem; color: var(--text-light); letter-spacing: 0.08em; margin-top: 4px; }
+
+  /* ─── GALLERY ─── */
+  .gallery-strip { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 1fr 1fr; height: 520px; gap: 3px; }
+  .gal-item { overflow: hidden; position: relative; }
+  .gal-item:first-child { grid-row: 1 / 3; }
+  .gal-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s; }
+  .gal-item:hover img { transform: scale(1.05); }
+  .gal-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(13,74,87,0.3) 0%, transparent 50%); opacity: 0; transition: opacity 0.3s; }
+  .gal-item:hover .gal-overlay { opacity: 1; }
+
+  /* ─── ROOMS ─── */
+  .rooms-section { background: var(--sand); padding: 96px 72px; }
+  .rooms-header { max-width: 1200px; margin: 0 auto 56px; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px; }
+  .rooms-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; max-width: 1200px; margin: 0 auto; }
+  .room-card { background: white; overflow: hidden; transition: transform 0.3s; }
+  .room-card:hover { transform: translateY(-4px); }
+  .room-img-wrap { overflow: hidden; }
+  .room-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; transition: transform 0.5s; }
+  .room-card:hover .room-img { transform: scale(1.04); }
+  .room-info { padding: 26px 22px 30px; }
+  .room-name { font-family: 'Cormorant Garamond', serif; font-size: 1.45rem; font-weight: 400; color: var(--text); margin-bottom: 8px; }
+  .room-desc { font-size: 0.83rem; font-weight: 300; color: var(--text-mid); line-height: 1.72; margin-bottom: 18px; }
+  .room-amenities { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 22px; }
+  .amenity-tag { font-size: 0.64rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ocean); background: rgba(27,107,123,0.08); padding: 4px 10px; border-radius: 20px; }
+  .room-footer { display: flex; align-items: center; justify-content: space-between; }
+  .room-price { font-family: 'Cormorant Garamond', serif; font-size: 1.55rem; font-weight: 300; color: var(--ocean-deep); }
+  .room-price span { font-family: 'Jost', sans-serif; font-size: 0.7rem; color: var(--text-light); font-weight: 300; }
+  .btn-room { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--coral); text-decoration: none; border-bottom: 1.5px solid var(--coral); padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
+  .btn-room:hover { color: var(--ocean-deep); border-color: var(--ocean-deep); }
+  .mobile-rooms-cta { display: none; text-align: center; margin-top: 32px; }
+
+  /* ─── AMENITIES ─── */
+  .amenities-section { padding: 96px 72px; }
+  .amenities-inner { max-width: 1200px; margin: 0 auto; }
+  .amenities-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 36px; margin-top: 56px; }
+  .amenity-item { display: flex; flex-direction: column; gap: 12px; }
+  .amenity-icon { width: 46px; height: 46px; background: var(--sand); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; }
+  .amenity-name { font-size: 0.85rem; font-weight: 500; color: var(--text); }
+  .amenity-desc { font-size: 0.78rem; font-weight: 300; color: var(--text-light); line-height: 1.65; }
+
+  /* ─── LOCATION ─── */
+  .location-section { background: var(--ocean-deep); padding: 96px 72px; }
+  .location-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+  .location-text .section-eyebrow { color: var(--ocean-light); }
+  .location-text .section-title { color: white; }
+  .location-text .section-body { color: rgba(255,255,255,0.62); max-width: 100%; }
+  .location-list { margin-top: 28px; display: flex; flex-direction: column; gap: 16px; }
+  .loc-item { display: flex; gap: 14px; align-items: flex-start; }
+  .loc-icon { font-size: 1.05rem; flex-shrink: 0; margin-top: 2px; }
+  .loc-info strong { display: block; font-size: 0.83rem; font-weight: 500; color: white; margin-bottom: 2px; }
+  .loc-info span { font-size: 0.78rem; font-weight: 300; color: rgba(255,255,255,0.52); }
+  .location-map { aspect-ratio: 1; background: rgba(255,255,255,0.05); border-radius: 2px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
+  .location-map iframe { width: 100%; height: 100%; border: none; filter: saturate(0.6) brightness(0.88); }
+
+  /* ─── CTA ─── */
+  .cta-section { background: var(--sand); padding: 96px 48px; text-align: center; position: relative; overflow: hidden; }
+  .cta-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 100%, rgba(27,107,123,0.08) 0%, transparent 70%); }
+  .cta-inner { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
+  .cta-section .section-body { margin: 0 auto 28px; max-width: 100%; }
+  .cta-perks { display: flex; justify-content: center; gap: 32px; margin-bottom: 36px; flex-wrap: wrap; }
+  .cta-perk { font-size: 0.76rem; font-weight: 500; color: var(--ocean-deep); display: flex; align-items: center; gap: 6px; }
+  .cta-perk::before { content: '✓'; color: var(--coral); font-weight: 700; }
+
+  /* ─── FOOTER ─── */
+  footer { background: var(--text); color: rgba(255,255,255,0.52); padding: 60px 72px 32px; }
+  .footer-inner { max-width: 1200px; margin: 0 auto; }
+  .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 52px; margin-bottom: 50px; }
+  .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; color: white; line-height: 1.2; margin-bottom: 14px; }
+  .footer-tagline { font-size: 0.8rem; line-height: 1.72; }
+  .footer-col h4 { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: white; margin-bottom: 18px; }
+  .footer-col a { display: block; font-size: 0.8rem; font-weight: 300; color: rgba(255,255,255,0.52); text-decoration: none; margin-bottom: 9px; transition: color 0.2s; }
+  .footer-col a:hover { color: white; }
+  .footer-contact { font-size: 0.8rem; line-height: 1.9; }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 22px; display: flex; justify-content: space-between; align-items: center; font-size: 0.7rem; flex-wrap: wrap; gap: 12px; }
+  .footer-bottom a { color: rgba(255,255,255,0.38); text-decoration: none; }
+
+  /* ═══ TABLET ≤1024px ═══ */
+  @media (max-width: 1024px) {
+    .nav-top { padding: 0 32px; }
+    .about-section, .rooms-section, .amenities-section, .cta-section { padding-left: 40px; padding-right: 40px; }
+    .location-section { padding: 80px 40px; }
+    .booking-bar { padding: 20px 40px; }
+    .trust-bar { padding: 18px 40px; gap: 28px; }
+    .hero-content { padding: 0 40px 64px; }
+    .about { grid-template-columns: 1fr; gap: 48px; }
+    .about-img { aspect-ratio: 16/9; }
+    .about-img-accent { display: none; }
+    .rooms-grid { grid-template-columns: 1fr 1fr; }
+    .amenities-grid { grid-template-columns: repeat(2, 1fr); }
+    .location-inner { grid-template-columns: 1fr; }
+    .location-map { aspect-ratio: 16/9; }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 36px; }
+    footer { padding: 52px 40px 28px; }
+    .gallery-strip { height: 400px; }
+  }
+
+  /* ═══ MOBILE ≤768px ═══ */
+  @media (max-width: 768px) {
+    .nav-top { padding: 0 20px; height: 68px; }
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+    .nav-logo-name { font-size: 1.08rem; }
+    .nav-logo-mark { width: 44px; height: 44px; }
+    .nav-logo-mark svg { width: 28px; height: 28px; }
+
+    .hero-content { padding: 0 24px 52px; }
+    .hero-sub { font-size: 0.9rem; }
+    .hero-actions { flex-direction: column; }
+    .btn-primary, .btn-ghost { text-align: center; width: 100%; max-width: 300px; }
+
+    .booking-bar { padding: 16px 20px; }
+    .booking-bar-inner { flex-direction: column; }
+    .bb-btn { padding: 16px 24px; min-height: auto; }
+    .direct-badge { font-size: 0.66rem; padding: 10px 16px; }
+
+    .trust-bar { padding: 14px 20px; gap: 14px; justify-content: flex-start; }
+    .trust-item { font-size: 0.73rem; }
+
+    .about-section { padding: 60px 24px; }
+    .about-stats { gap: 12px; }
+    .stat-card { padding: 16px; }
+
+    .gallery-strip { height: auto; grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+    .gal-item:first-child { grid-column: 1 / 3; grid-row: auto; aspect-ratio: 16/9; }
+    .gal-item:not(:first-child) { aspect-ratio: 1; }
+
+    .rooms-section { padding: 60px 20px; }
+    .rooms-header .btn-primary { display: none; }
+    .rooms-grid { grid-template-columns: 1fr; gap: 14px; }
+    .mobile-rooms-cta { display: block; }
+
+    .amenities-section { padding: 60px 24px; }
+    .amenities-grid { grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 36px; }
+
+    .location-section { padding: 60px 24px; }
+
+    .cta-section { padding: 72px 24px; }
+    .cta-perks { gap: 14px; flex-direction: column; align-items: center; }
+
+    footer { padding: 48px 24px 28px; }
+    .footer-top { grid-template-columns: 1fr; gap: 28px; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; }
+  }
+
+  /* ═══ SMALL ≤480px ═══ */
+  @media (max-width: 480px) {
+    .nav-logo-sub { display: none; }
+    .amenities-grid { grid-template-columns: 1fr; }
+    .about-stats { grid-template-columns: 1fr 1fr; }
+    .gallery-strip { grid-template-columns: 1fr; }
+    .gal-item:first-child { grid-column: auto; aspect-ratio: 16/9; }
+    .gal-item:nth-child(4), .gal-item:nth-child(5) { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-top">
+    <a href="#" class="nav-logo-wrap">
+      <div class="nav-logo-mark">
+        <svg viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="17" y1="30" x2="17" y2="11" stroke="rgba(255,255,255,0.5)" stroke-width="1.3" stroke-linecap="round"/>
+          <path d="M17 11 C14 7, 9 6, 8 10 C11 11, 15 13, 17 11Z" fill="rgba(168,216,160,0.92)"/>
+          <path d="M17 11 C20 7, 25 6, 26 10 C23 11, 19 13, 17 11Z" fill="rgba(168,216,160,0.72)"/>
+          <path d="M17 16 C14 12, 8 12, 9 16 C12 17, 15 17, 17 16Z" fill="rgba(168,216,160,0.78)"/>
+          <path d="M17 16 C20 12, 26 12, 25 16 C22 17, 19 17, 17 16Z" fill="rgba(168,216,160,0.58)"/>
+          <circle cx="17" cy="24" r="3.4" fill="rgba(200,99,74,0.88)"/>
+          <circle cx="17" cy="24" r="1.4" fill="rgba(245,239,228,0.9)"/>
+        </svg>
+      </div>
+      <div class="nav-logo-text">
+        <span class="nav-logo-name">The Island Garden Hotel</span>
+        <span class="nav-logo-sub">Nassau, Bahamas</span>
+      </div>
+    </a>
+
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#rooms">Rooms</a>
+      <a href="#amenities">Amenities</a>
+      <a href="#location">Location</a>
+      <a href="https://us2.cloudbeds.com/en/reservation/lPXE9c?currency=usd" target="_blank" class="btn-book-nav">Book Direct</a>
+    </div>
+
+    <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="nav-drawer" id="navDrawer">
+    <a href="#about">About</a>
+    <a href="#rooms">Rooms</a>
+    <a href="#amenities">Amenities</a>
+    <a href="#location">Location</a>
+    <a href="https://us2.cloudbeds.com/en/reservation/lPXE9c?currency=usd" target="_blank" class="btn-book-drawer">Book Direct — Best Rate Guaranteed</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Nassau, Bahamas · West Bay Street</p>
+    <h1 class="hero-title">A Hidden Gem<br>in <em>Paradise</em></h1>
+    <p class="hero-sub">Intimate tropical gardens, a sparkling pool, and 40 thoughtfully appointed rooms — the warm heart of Nassau awaits.</p>
+    <div class="hero-actions">
+      <a href="https://us2.cloudbeds.com/en/reservation/lPXE9c?currency=usd" target="_blank" class="btn-primary">Book Direct &amp; Save</a>
+      <a href="#rooms" class="btn-ghost">Explore Rooms</a>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING BAR -->
+<div class="booking-bar">
+  <div class="booking-bar-inner">
+    <div class="bb-field">
+      <label class="bb-label">Check In</label>
+      <input type="date" class="bb-input" id="checkin">
+    </div>
+    <div class="bb-field">
+      <label class="bb-label">Check Out</label>
+      <input type="date" class="bb-input" id="checkout">
+    </div>
+    <div class="bb-field">
+      <label class="bb-label">Guests</label>
+      <input type="text" class="bb-input" placeholder="2 Adults">
+    </div>
+    <button class="bb-btn" onclick="window.open('https://us2.cloudbeds.com/en/reservation/lPXE9c?currency=usd','_blank')">Check Availability</button>
+  </div>
+</div>
+<div class="direct-badge">Book direct for the <strong>best available rate</strong> — no OTA fees, no hidden charges.</div>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item"><span>✓</span> Best Rate Guaranteed</div>
+  <div class="trust-item"><span>☀️</span> Free Parking</div>
+  <div class="trust-item"><span>🏊</span> Pool Included</div>
+  <div class="trust-item"><span>✈️</span> Airport Shuttle</div>
+  <div class="trust-item"><span>📶</span> Free WiFi</div>
+</div>
+
+<!-- ABOUT -->
+<section id="about" class="about-section">
+  <div class="about">
+    <div class="about-img-wrap">
+      <img class="about-img" src="https://h-img2.us2.cloudbeds.com/uploads/32901098274951/956171f5-3a0f-42f9-acbc-8c1016f2f125~~68193bfb5614f.jpeg" alt="Pool at The Island Garden Hotel" loading="lazy">
+      <img class="about-img-accent" src="https://h-img3.us2.cloudbeds.com/uploads/32901098274951/efffa02b-7f59-48fd-8a32-c0c0dc385ae1~~68193bf51f7b8.jpeg" alt="Hotel exterior" loading="lazy">
+    </div>
+    <div>
+      <p class="section-eyebrow">Our Story</p>
+      <h2 class="section-title">Where Bahamian<br>Charm Meets <em>Comfort</em></h2>
+      <p class="section-body">Nestled along picturesque West Bay Street, The Island Garden Hotel offers an intimate escape with just 40 rooms. Our lush tropical gardens provide a serene backdrop for relaxation, while the glittering pool invites you to slow down and breathe it all in.</p>
+      <p class="section-body" style="margin-top:14px;">Whether you're here for adventure, romance, or simply a warm Bahamian escape — we blend everyday comfort with the enchanting allure only Nassau can offer.</p>
+      <div class="about-stats">
+        <div class="stat-card"><div class="stat-num">40</div><div class="stat-label">Intimate Rooms</div></div>
+        <div class="stat-card"><div class="stat-num">24/7</div><div class="stat-label">Front Desk & Security</div></div>
+        <div class="stat-card"><div class="stat-num">3pm</div><div class="stat-label">Check-In / 12pm Out</div></div>
+        <div class="stat-card"><div class="stat-num">W.Bay</div><div class="stat-label">Prime Nassau Location</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<div class="gallery-strip">
+  <div class="gal-item"><img src="https://h-img3.us2.cloudbeds.com/uploads/32901098274951/cd41ff09-6556-4626-884c-2cedf924105b~~68193bf6b2a1d.jpeg" alt="Hotel room" loading="lazy"><div class="gal-overlay"></div></div>
+  <div class="gal-item"><img src="https://h-img3.us2.cloudbeds.com/uploads/32901098274951/efffa02b-7f59-48fd-8a32-c0c0dc385ae1~~68193bf51f7b8.jpeg" alt="Hotel exterior" loading="lazy"><div class="gal-overlay"></div></div>
+  <div class="gal-item"><img src="https://h-img2.us2.cloudbeds.com/uploads/32901098274951/4da771ab-9017-41da-84bd-bfe64a7a308b~~68193bff677a2.jpeg" alt="Hotel amenity" loading="lazy"><div class="gal-overlay"></div></div>
+  <div class="gal-item"><img src="https://h-img2.us2.cloudbeds.com/uploads/32901098274951/cc3332be-c7e8-473f-9478-7cf745aacd4f~~68193c056fc48.jpeg" alt="Room view" loading="lazy"><div class="gal-overlay"></div></div>
+  <div class="gal-item"><img src="https://h-img1.us2.cloudbeds.com/uploads/32901098274951/02b13ad5-a721-433d-bec9-3d77218a784c~~68193c0221eaa.jpeg" alt="Hotel grounds" loading="lazy"><div class="gal-overlay"></div></div>
+</div>
+
+<!-- ROOMS -->
+<section id="rooms" class="rooms-section">
+  <div class="rooms-header">
+    <div>
+      <p class="section-eyebrow">Accommodation</p>
+      <h2 class="section-title">Choose Your <em>Retreat</em></h2>
+    </div>
+    <a href="https://us2.cloudbeds.com/en/reservation/lPXE9c?currency=usd" target="_blank" class="btn-primary">View All &amp; Book</a>
+  </div>
+  <div class="rooms-grid">
+    <div class="room-card">
+      <div class="room-img-wrap"><img class="room-img" src="https://h-img3.us2.cloudbeds.com/uploads/32901098274951/cd41ff09-6556-4626-884c-2cedf924105b~~68195819a98ea.jpeg" alt="Queen Room" loading="lazy"></div>
+      <div class="room-info">
+        <div class="room-name">Queen Room</div>
+        <p class="room-desc">A cozy, comfortable retreat with a spacious queen bed, clean design, and all the essentials for a restful stay.</p>
+        <div class="room-amenities">
+          <span class="amenity-tag">Queen Bed</span><span class="amenity-tag">WiFi</span><span class="amenity-tag">Smart TV</span><span class="amenity-tag">AC</span><span class="amenity-tag">Mini Fridge</span>
+        </div>
+        <div class="room-footer">
+          <div class="room-price">From $89 <span>/ night</span></div>
+          <a href="https://us2.cloudbeds.com/en/reservation/lPXE9c?currency=usd" target="_blank" class="btn-room">Book Now →</a>
+        </div>
+      </div>
+    </div>
+    <div class="room-card">
+      <div class="room-img-wrap"><img class="room-img" src="https://h-img2.us2.cloudbeds.com/uploads/32901098274951/956171f5-3a0f-42f9-acbc-8c1016f2f125~~68193bfb5614f.jpeg" alt="Queen Room with Patio" loading="lazy"></div>
+      <div class="room-info">
+        <div class="room-name">Queen + Private Patio</div>
+        <p class="room-desc">Step outside to your own private patio — ideal for morning coffee or an evening unwind with that island breeze.</p>
+        <div class="room-amenities">
+          <span class="amenity-tag">Private Patio</span><span class="amenity-tag">Queen Bed</span><span class="amenity-tag">WiFi</span><span class="amenity-tag">Smart TV</span><span class="amenity-tag">Microwave</span>
+        </div>
+        <div class="room-footer">
+          <div class="room-price">From $109 <span>/ night</span></div>
+          <a href="https://us2.cloudbeds.com/en/reservation/lPXE9c?currency=usd" target="_blank" class="btn-room">Book Now →</a>
+        </div>
+      </div>
+    </div>
+    <div class="room-card">
+      <div class="room-img-wrap"><img class="room-img" src="https://h-img2.us2.cloudbeds.com/uploads/32901098274951/dbf899da-edbb-43f2-8b1f-4f6bb7899db4~~6819600dd489a.jpeg" alt="Queen Room with Balcony" loading="lazy"></div>
+      <div class="room-info">
+        <div class="room-name">Queen + Balcony View</div>
+        <p class="room-desc">Elevate your stay with a private balcony and scenic views. Wake up and breathe in Nassau every single morning.</p>
+        <div class="room-amenities">
+          <span class="amenity-tag">Private Balcony</span><span class="amenity-tag">Scenic View</span><span class="amenity-tag">Queen Bed</span><span class="amenity-tag">WiFi</span><span class="amenity-tag">AC</span>
+        </div>
+        <div class="room-footer">
+          <div class="room-price">From $129 <span>/ night</span></div>
+          <a href="https://us2.cloudbeds.com/en/reservation/lPXE9c?currency=usd" target="_blank" class="btn-room">Book Now →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mobile-rooms-cta">
+    <a href="https://us2.cloudbeds.com/en/reservation/lPXE9c?currency=usd" target="_blank" class="btn-primary">View All Rooms &amp; Book</a>
+  </div>
+</section>
+
+<!-- AMENITIES -->
+<section id="amenities" class="amenities-section">
+  <div class="amenities-inner">
+    <p class="section-eyebrow">What's Included</p>
+    <h2 class="section-title">Everything You <em>Need</em></h2>
+    <div class="amenities-grid">
+      <div class="amenity-item"><div class="amenity-icon">🏊</div><div class="amenity-name">Swimming Pool</div><div class="amenity-desc">Dive into our sparkling outdoor pool surrounded by lush tropical gardens.</div></div>
+      <div class="amenity-item"><div class="amenity-icon">📶</div><div class="amenity-name">Free WiFi</div><div class="amenity-desc">High-speed internet throughout the property, included with every stay.</div></div>
+      <div class="amenity-item"><div class="amenity-icon">🚗</div><div class="amenity-name">Free Parking</div><div class="amenity-desc">Complimentary on-site parking — no extra fees, no fuss.</div></div>
+      <div class="amenity-item"><div class="amenity-icon">✈️</div><div class="amenity-name">Airport Shuttle</div><div class="amenity-desc">Convenient airport transfers available — ask us at booking.</div></div>
+      <div class="amenity-item"><div class="amenity-icon">🔐</div><div class="amenity-name">24-Hour Security</div><div class="amenity-desc">CCTV coverage and round-the-clock security for your peace of mind.</div></div>
+      <div class="amenity-item"><div class="amenity-icon">🌿</div><div class="amenity-name">Tropical Gardens</div><div class="amenity-desc">Lush, manicured gardens provide a serene and beautiful setting.</div></div>
+      <div class="amenity-item"><div class="amenity-icon">❄️</div><div class="amenity-name">Air Conditioning</div><div class="amenity-desc">All rooms equipped with modern AC to keep you cool and comfortable.</div></div>
+      <div class="amenity-item"><div class="amenity-icon">📲</div><div class="amenity-name">Contactless Check-In</div><div class="amenity-desc">Express and contactless check-in — get to your room faster.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section id="location" class="location-section">
+  <div class="location-inner">
+    <div class="location-text">
+      <p class="section-eyebrow">Find Us</p>
+      <h2 class="section-title">Heart of <em>Nassau</em></h2>
+      <p class="section-body">Ideally situated on West Bay Street, we're moments from Nassau's finest beaches, dining, shopping, and attractions.</p>
+      <div class="location-list">
+        <div class="loc-item"><span class="loc-icon">📍</span><div class="loc-info"><strong>483 West Bay Street</strong><span>Nassau, New Providence, Bahamas</span></div></div>
+        <div class="loc-item"><span class="loc-icon">📞</span><div class="loc-info"><strong>+1 (242) 327-6364</strong><span>Call us any time — we're always happy to help</span></div></div>
+        <div class="loc-item"><span class="loc-icon">✉️</span><div class="loc-info"><strong>Theislandgarden242@gmail.com</strong><span>Email for group bookings or special requests</span></div></div>
+        <div class="loc-item"><span class="loc-icon">🏖️</span><div class="loc-info"><strong>Steps from Cable Beach</strong><span>World-famous stretch of white sand &amp; turquoise water</span></div></div>
+      </div>
+    </div>
+    <div class="location-map">
+      <iframe src="https://maps.google.com/maps?q=483+West+Bay+Street+Nassau+Bahamas&t=&z=15&ie=UTF8&iwloc=&output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="cta-inner">
+    <p class="section-eyebrow">Direct Booking</p>
+    <h2 class="section-title">Skip the Middleman.<br><em>Book Direct &amp; Save.</em></h2>
+    <p class="section-body">When you book directly with us, you get our best available rate — guaranteed. No OTA commissions, no hidden charges, just you and us.</p>
+    <div class="cta-perks">
+      <span class="cta-perk">Best Rate Guaranteed</span>
+      <span class="cta-perk">No Hidden Fees</span>
+      <span class="cta-perk">Flexible Cancellation</span>
+      <span class="cta-perk">Direct Support</span>
+    </div>
+    <a href="https://us2.cloudbeds.com/en/reservation/lPXE9c?currency=usd" target="_blank" class="btn-primary" style="font-size:0.84rem; padding:17px 44px;">Reserve Your Room →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">The Island Garden Hotel</div>
+        <p class="footer-tagline">A warm, intimate escape in the heart of Nassau — where tropical gardens, a sparkling pool, and genuine Bahamian hospitality come together.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <a href="#about">About Us</a><a href="#rooms">Rooms</a><a href="#amenities">Amenities</a><a href="#location">Location</a>
+      </div>
+      <div class="footer-col">
+        <h4>Rooms</h4>
+        <a href="https://us2.cloudbeds.com/en/reservation/lPXE9c" target="_blank">Queen Room</a>
+        <a href="https://us2.cloudbeds.com/en/reservation/lPXE9c" target="_blank">Patio Room</a>
+        <a href="https://us2.cloudbeds.com/en/reservation/lPXE9c" target="_blank">Balcony Room</a>
+        <a href="https://us2.cloudbeds.com/en/reservation/lPXE9c" target="_blank">Check Availability</a>
+      </div>
+      <div class="footer-col footer-contact">
+        <h4>Contact</h4>
+        483 West Bay Street<br>Nassau, Bahamas<br><br>
+        <a href="tel:+12423276364">+1 (242) 327-6364</a><br>
+        <a href="mailto:Theislandgarden242@gmail.com">Theislandgarden242@gmail.com</a><br><br>
+        Check-in: 3:00 PM · Check-out: 12:00 PM
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 The Island Garden Hotel. All rights reserved.</span>
+      <div style="display:flex;gap:20px;"><a href="#">Privacy Policy</a><a href="#">Terms</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll shadow
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 40));
+
+  // Hamburger
+  const hamburger = document.getElementById('hamburger');
+  const drawer    = document.getElementById('navDrawer');
+  hamburger.addEventListener('click', () => {
+    const open = drawer.classList.toggle('open');
+    navbar.classList.toggle('menu-open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    drawer.classList.remove('open');
+    navbar.classList.remove('menu-open');
+    document.body.style.overflow = '';
+  }));
+
+  // Default dates
+  const tomorrow = new Date(); tomorrow.setDate(tomorrow.getDate() + 1);
+  const co = new Date(tomorrow); co.setDate(co.getDate() + 2);
+  const fmt = d => d.toISOString().split('T')[0];
+  document.getElementById('checkin').value  = fmt(tomorrow);
+  document.getElementById('checkout').value = fmt(co);
+
+  // Fade-in
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }});
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.room-card, .amenity-item, .stat-card, .loc-item').forEach(el => {
+    el.style.opacity='0'; el.style.transform='translateY(18px)';
+    el.style.transition='opacity 0.55s ease, transform 0.55s ease';
+    io.observe(el);
+  });
+</script>
+</body>
+</html>
