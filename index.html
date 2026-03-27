@@ -70,7 +70,7 @@
 }
 </script>
 
-<!-- ═══ FAQ SCHEMA (targets "cheap hotel Nassau" questions) ═══ -->
+<!-- ═══ FAQ SCHEMA ═══ -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -112,6 +112,9 @@
 }
 </script>
 
+<!-- ═══ CLOUDBEDS IMMERSIVE WIDGET SCRIPT ═══ -->
+<script src="https://us2.cloudbeds.com/widget/load/lPXE9c/immersive"></script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 
@@ -133,6 +136,10 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body { font-family: 'Jost', sans-serif; background: var(--white); color: var(--text); overflow-x: hidden; }
+
+  /* ─── CLOUDBEDS TRIGGER BUTTONS ─── */
+  /* All booking buttons use this data attribute to trigger the immersive widget */
+  [data-be-url] { cursor: pointer; }
 
   /* ─── SVG ICON SYSTEM ─── */
   .icon {
@@ -162,8 +169,8 @@
   .nav-links { display: flex; gap: 30px; align-items: center; }
   .nav-links a { font-size: 0.77rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-mid); text-decoration: none; transition: color 0.2s; }
   .nav-links a:hover { color: var(--ocean); }
-  .btn-book-nav { background: var(--ocean); color: white; padding: 10px 22px; border-radius: 2px; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; transition: background 0.2s, transform 0.15s; white-space: nowrap; }
-  .btn-book-nav:hover { background: var(--ocean-deep); transform: translateY(-1px); }
+  .btn-book-nav { background: var(--ocean); color: white !important; padding: 10px 22px; border-radius: 2px; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; transition: background 0.2s, transform 0.15s; white-space: nowrap; border: none; font-family: 'Jost', sans-serif; display: inline-block; }
+  .btn-book-nav:hover { background: var(--ocean-deep) !important; transform: translateY(-1px); }
 
   .nav-hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 40px; height: 40px; background: none; border: none; cursor: pointer; padding: 4px; }
   .nav-hamburger span { display: block; height: 2px; background: var(--ocean-deep); border-radius: 2px; transition: transform 0.3s, opacity 0.3s; transform-origin: center; }
@@ -175,7 +182,7 @@
   .nav-drawer.open { display: flex; }
   .nav-drawer a { font-size: 0.95rem; font-weight: 400; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text); text-decoration: none; padding: 15px 0; border-bottom: 1px solid var(--border); transition: color 0.2s; }
   .nav-drawer a:hover { color: var(--ocean); }
-  .nav-drawer .btn-book-drawer { margin-top: 20px; background: var(--coral); color: white; padding: 16px 24px; text-align: center; border-radius: 2px; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; border-bottom: none; transition: background 0.2s; }
+  .nav-drawer .btn-book-drawer { margin-top: 20px; background: var(--coral); color: white !important; padding: 16px 24px; text-align: center; border-radius: 2px; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; border-bottom: none; transition: background 0.2s; border: none; font-family: 'Jost', sans-serif; cursor: pointer; display: block; width: 100%; }
   .nav-drawer .btn-book-drawer:hover { background: var(--coral-light); }
 
   /* ─── HERO ─── */
@@ -194,9 +201,9 @@
   .hero-title em { font-style: italic; color: #A8D8E0; }
   .hero-sub { font-size: 1rem; font-weight: 300; color: rgba(255,255,255,0.78); max-width: 480px; line-height: 1.75; margin-bottom: 36px; }
   .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
-  .btn-primary { background: var(--coral); color: white; padding: 15px 34px; border-radius: 2px; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; display: inline-block; transition: background 0.2s, transform 0.15s, box-shadow 0.2s; }
+  .btn-primary { background: var(--coral); color: white; padding: 15px 34px; border-radius: 2px; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; display: inline-block; transition: background 0.2s, transform 0.15s, box-shadow 0.2s; border: none; font-family: 'Jost', sans-serif; cursor: pointer; }
   .btn-primary:hover { background: var(--coral-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(200,99,74,0.35); }
-  .btn-ghost { border: 1.5px solid rgba(255,255,255,0.6); color: white; padding: 13px 30px; border-radius: 2px; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; display: inline-block; transition: border-color 0.2s, background 0.2s; }
+  .btn-ghost { border: 1.5px solid rgba(255,255,255,0.6); color: white; padding: 13px 30px; border-radius: 2px; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; display: inline-block; transition: border-color 0.2s, background 0.2s; background: none; font-family: 'Jost', sans-serif; cursor: pointer; }
   .btn-ghost:hover { border-color: white; background: rgba(255,255,255,0.1); }
 
   /* ─── BOOKING BAR ─── */
@@ -207,6 +214,8 @@
   .bb-label { font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
   .bb-input { background: none; border: none; outline: none; color: white; font-family: 'Jost', sans-serif; font-size: 0.88rem; cursor: pointer; width: 100%; }
   .bb-input::placeholder { color: rgba(255,255,255,0.55); }
+  /* Style date inputs for dark background */
+  .bb-input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1) opacity(0.6); cursor: pointer; }
   .bb-btn { background: var(--coral); color: white; border: none; padding: 0 32px; font-family: 'Jost', sans-serif; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; white-space: nowrap; min-height: 56px; }
   .bb-btn:hover { background: var(--coral-light); }
   .direct-badge { text-align: center; background: var(--ocean); padding: 11px; font-size: 0.7rem; color: rgba(255,255,255,0.78); letter-spacing: 0.06em; }
@@ -267,7 +276,7 @@
   .room-footer { display: flex; align-items: center; justify-content: space-between; }
   .room-price { font-family: 'Cormorant Garamond', serif; font-size: 1.55rem; font-weight: 300; color: var(--ocean-deep); }
   .room-price span { font-family: 'Jost', sans-serif; font-size: 0.7rem; color: var(--text-light); font-weight: 300; }
-  .btn-room { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--coral); text-decoration: none; border-bottom: 1.5px solid var(--coral); padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
+  .btn-room { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--coral); text-decoration: none; border-bottom: 1.5px solid var(--coral); padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; background: none; border-top: none; border-left: none; border-right: none; font-family: 'Jost', sans-serif; cursor: pointer; }
   .btn-room:hover { color: var(--ocean-deep); border-color: var(--ocean-deep); }
   .mobile-rooms-cta { display: none; text-align: center; margin-top: 32px; }
 
@@ -456,7 +465,8 @@
       <a href="#amenities">Amenities</a>
       <a href="#location">Location</a>
       <a href="#faq">FAQ</a>
-      <a href="https://us2.cloudbeds.com/en/reservation/lPXE9c?currency=usd" target="_blank" class="btn-book-nav">Book Direct</a>
+      <!-- CLOUDBEDS: Nav Book Direct button -->
+      <button class="btn-book-nav" data-be-url="https://us2.cloudbeds.com/reservation/lPXE9c">Book Direct</button>
     </div>
     <button class="nav-hamburger" id="hamburger" aria-label="Open navigation menu">
       <span></span><span></span><span></span>
@@ -468,7 +478,8 @@
     <a href="#amenities">Amenities</a>
     <a href="#location">Location</a>
     <a href="#faq">FAQ</a>
-    <a href="https://us2.cloudbeds.com/en/reservation/lPXE9c?currency=usd" target="_blank" class="btn-book-drawer">Book Direct — Best Rate Guaranteed</a>
+    <!-- CLOUDBEDS: Mobile drawer Book Direct button -->
+    <button class="btn-book-drawer" data-be-url="https://us2.cloudbeds.com/reservation/lPXE9c">Book Direct — Best Rate Guaranteed</button>
   </div>
 </nav>
 
@@ -478,9 +489,10 @@
   <div class="hero-content">
     <p class="hero-eyebrow">Nassau, Bahamas · West Bay Street · Near Cable Beach</p>
     <h1 class="hero-title">Affordable Luxury<br>in <em>Nassau</em></h1>
-    <p class="hero-sub">Boutique comfort from $89/night — intimate tropical gardens, a sparkling pool, and genuine Bahamian warmth. No OTA markups, ever.</p>
+    <p class="hero-sub">Boutique comfort from $130/night — intimate tropical gardens, a sparkling pool, and genuine Bahamian warmth.</p>
     <div class="hero-actions">
-      <a href="https://us2.cloudbeds.com/en/reservation/lPXE9c?currency=usd" target="_blank" class="btn-primary">Book Direct &amp; Save</a>
+      <!-- CLOUDBEDS: Hero primary CTA -->
+      <button class="btn-primary" data-be-url="https://us2.cloudbeds.com/reservation/lPXE9c">Book Direct &amp; Save</button>
       <a href="#rooms" class="btn-ghost">View Rooms &amp; Rates</a>
     </div>
   </div>
@@ -501,7 +513,8 @@
       <label class="bb-label" for="guests">Guests</label>
       <input type="text" class="bb-input" id="guests" placeholder="2 Adults">
     </div>
-    <button class="bb-btn" onclick="window.open('https://us2.cloudbeds.com/en/reservation/lPXE9c?currency=usd','_blank')">Check Availability</button>
+    <!-- CLOUDBEDS: Booking bar check availability button — passes dates via JS -->
+    <button class="bb-btn" id="bbCheckBtn">Check Availability</button>
   </div>
 </div>
 <div class="direct-badge">
@@ -596,7 +609,8 @@
       <p class="section-eyebrow">Affordable Rooms in Nassau</p>
       <h2 class="section-title">Choose Your <em>Rate</em></h2>
     </div>
-    <a href="https://us2.cloudbeds.com/en/reservation/lPXE9c?currency=usd" target="_blank" class="btn-primary">View All &amp; Book</a>
+    <!-- CLOUDBEDS: Rooms header CTA -->
+    <button class="btn-primary" data-be-url="https://us2.cloudbeds.com/reservation/lPXE9c">View All &amp; Book</button>
   </div>
   <div class="rooms-grid">
     <article class="room-card">
@@ -609,7 +623,8 @@
         </div>
         <div class="room-footer">
           <div class="room-price">From $89 <span>/ night</span></div>
-          <a href="https://us2.cloudbeds.com/en/reservation/lPXE9c?currency=usd" target="_blank" class="btn-room">Book Now →</a>
+          <!-- CLOUDBEDS: Room card Book Now -->
+          <button class="btn-room" data-be-url="https://us2.cloudbeds.com/reservation/lPXE9c">Book Now →</button>
         </div>
       </div>
     </article>
@@ -623,7 +638,8 @@
         </div>
         <div class="room-footer">
           <div class="room-price">From $109 <span>/ night</span></div>
-          <a href="https://us2.cloudbeds.com/en/reservation/lPXE9c?currency=usd" target="_blank" class="btn-room">Book Now →</a>
+          <!-- CLOUDBEDS: Room card Book Now -->
+          <button class="btn-room" data-be-url="https://us2.cloudbeds.com/reservation/lPXE9c">Book Now →</button>
         </div>
       </div>
     </article>
@@ -637,13 +653,15 @@
         </div>
         <div class="room-footer">
           <div class="room-price">From $129 <span>/ night</span></div>
-          <a href="https://us2.cloudbeds.com/en/reservation/lPXE9c?currency=usd" target="_blank" class="btn-room">Book Now →</a>
+          <!-- CLOUDBEDS: Room card Book Now -->
+          <button class="btn-room" data-be-url="https://us2.cloudbeds.com/reservation/lPXE9c">Book Now →</button>
         </div>
       </div>
     </article>
   </div>
   <div class="mobile-rooms-cta">
-    <a href="https://us2.cloudbeds.com/en/reservation/lPXE9c?currency=usd" target="_blank" class="btn-primary">View All Rooms &amp; Book</a>
+    <!-- CLOUDBEDS: Mobile rooms CTA -->
+    <button class="btn-primary" data-be-url="https://us2.cloudbeds.com/reservation/lPXE9c">View All Rooms &amp; Book</button>
   </div>
 </section>
 
@@ -653,79 +671,62 @@
     <p class="section-eyebrow">Everything Included</p>
     <h2 class="section-title">More Value, <em>No Hidden Costs</em></h2>
     <div class="amenities-grid">
-
       <div class="amenity-item">
         <div class="amenity-icon-wrap">
-          <!-- Pool / waves -->
           <svg viewBox="0 0 24 24"><path d="M2 12c1.5 0 1.5-2 3-2s1.5 2 3 2 1.5-2 3-2 1.5 2 3 2 1.5-2 3-2"/><path d="M2 17c1.5 0 1.5-2 3-2s1.5 2 3 2 1.5-2 3-2 1.5 2 3 2 1.5-2 3-2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v3"/></svg>
         </div>
         <div class="amenity-name">Swimming Pool</div>
         <div class="amenity-desc">Sparkling outdoor pool surrounded by lush tropical gardens — a resort feel at a boutique price.</div>
       </div>
-
       <div class="amenity-item">
         <div class="amenity-icon-wrap">
-          <!-- WiFi -->
           <svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1" fill="var(--ocean-deep)" stroke="none"/></svg>
         </div>
         <div class="amenity-name">Free High-Speed WiFi</div>
         <div class="amenity-desc">Fast, reliable internet throughout the property — included in every stay at no extra charge.</div>
       </div>
-
       <div class="amenity-item">
         <div class="amenity-icon-wrap">
-          <!-- Car / parking -->
           <svg viewBox="0 0 24 24"><rect x="2" y="8" width="20" height="10" rx="2"/><path d="M5 8V6a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v2"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>
         </div>
         <div class="amenity-name">Free Parking</div>
         <div class="amenity-desc">Complimentary on-site parking for all guests — a real saving in Nassau.</div>
       </div>
-
       <div class="amenity-item">
         <div class="amenity-icon-wrap">
-          <!-- Plane / shuttle -->
           <svg viewBox="0 0 24 24"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21 4 19.5 2.5 18 1 16 1 14.5 2.5L11 6 2.8 6.2l-1 1 1 1.5 2.3.7L4 13l2 2 4.5-2L13 15.2l1.5 1.5 1.3-1.3-2-1.7z"/></svg>
         </div>
         <div class="amenity-name">Airport Shuttle</div>
         <div class="amenity-desc">Convenient airport transfers to and from LPIA — just ask at booking.</div>
       </div>
-
       <div class="amenity-item">
         <div class="amenity-icon-wrap">
-          <!-- Shield / security -->
           <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
         </div>
         <div class="amenity-name">24-Hour Security</div>
         <div class="amenity-desc">CCTV and round-the-clock security so you can relax with complete peace of mind.</div>
       </div>
-
       <div class="amenity-item">
         <div class="amenity-icon-wrap">
-          <!-- Leaf / gardens -->
           <svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 19.62A1 1 0 0 0 5 21C6.15 21 7 20 8 19c1-1 2-2 4-2s3 1 4 2 1.85 2 3 2a1 1 0 0 0 1.18-1.38C21.17 16.17 19 10 10 8z"/><path d="M12 19V8"/></svg>
         </div>
         <div class="amenity-name">Tropical Gardens</div>
         <div class="amenity-desc">Lush, beautifully maintained gardens give the property a true island resort atmosphere.</div>
       </div>
-
       <div class="amenity-item">
         <div class="amenity-icon-wrap">
-          <!-- Snowflake / AC -->
           <svg viewBox="0 0 24 24"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5l-5 5-5-5"/><path d="M17 19l-5-5-5 5"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M5 7l5 5-5 5"/><path d="M19 7l-5 5 5 5"/></svg>
         </div>
         <div class="amenity-name">Air Conditioning</div>
         <div class="amenity-desc">Modern, powerful AC in every room — stay cool even on Nassau's warmest days.</div>
       </div>
-
       <div class="amenity-item">
         <div class="amenity-icon-wrap">
-          <!-- Phone / contactless -->
           <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-width="2"/></svg>
         </div>
         <div class="amenity-name">Contactless Check-In</div>
         <div class="amenity-desc">Express and contactless check-in options — skip the line and get straight to your room.</div>
       </div>
-
     </div>
   </div>
 </section>
@@ -770,13 +771,12 @@
   </div>
 </section>
 
-<!-- FAQ (SEO SECTION) -->
+<!-- FAQ -->
 <section id="faq" class="faq-section">
   <div class="faq-inner">
     <p class="section-eyebrow">Frequently Asked Questions</p>
     <h2 class="section-title">Everything You Want<br>to <em>Know</em></h2>
     <div class="faq-grid">
-
       <div class="faq-item">
         <button class="faq-question" aria-expanded="false">
           <span class="faq-q-text">What is the most affordable hotel in Nassau, Bahamas?</span>
@@ -784,7 +784,6 @@
         </button>
         <div class="faq-answer">The Island Garden Hotel is one of Nassau's best-value boutique hotels, with rooms starting from just $89 per night. Unlike the large Cable Beach resorts that charge $250–$500+/night, we offer a comfortable, intimate stay at a fraction of the cost — with the same Bahamian sun, pool, and beaches just outside your door.</div>
       </div>
-
       <div class="faq-item">
         <button class="faq-question" aria-expanded="false">
           <span class="faq-q-text">Is there a cheap hotel near Cable Beach Nassau?</span>
@@ -792,7 +791,6 @@
         </button>
         <div class="faq-answer">Yes! We're located on West Bay Street, just steps from Cable Beach — Nassau's most beautiful stretch of white sand. You get the same beach access as the luxury resorts nearby, at a significantly lower nightly rate. Rooms start from $89/night with free WiFi, free parking, and pool access included.</div>
       </div>
-
       <div class="faq-item">
         <button class="faq-question" aria-expanded="false">
           <span class="faq-q-text">How do I get the best rate for Nassau hotels?</span>
@@ -800,7 +798,6 @@
         </button>
         <div class="faq-answer">Always book directly on our website or through our booking engine. OTAs like Expedia, Booking.com, and Hotels.com add a commission markup (typically 15–25%) on top of our rates. Booking direct guarantees you the lowest available price, with no hidden fees, and gives you direct access to our team for any special requests.</div>
       </div>
-
       <div class="faq-item">
         <button class="faq-question" aria-expanded="false">
           <span class="faq-q-text">What does the room rate include at The Island Garden Hotel?</span>
@@ -808,7 +805,6 @@
         </button>
         <div class="faq-answer">Every stay includes free high-speed WiFi, free on-site parking, access to our outdoor swimming pool, air conditioning, Smart TV, mini fridge, and 24-hour front desk and security. Airport shuttle is also available on request. No resort fees, no surprise charges.</div>
       </div>
-
       <div class="faq-item">
         <button class="faq-question" aria-expanded="false">
           <span class="faq-q-text">Is The Island Garden Hotel good for budget travellers?</span>
@@ -816,7 +812,6 @@
         </button>
         <div class="faq-answer">Absolutely. We're designed for travellers who want a genuinely comfortable Nassau stay without paying resort prices. Our intimate 40-room property means personal service, a calm atmosphere, and excellent value. You'll spend less on accommodation and more on experiencing Nassau — the beaches, the food, and the culture.</div>
       </div>
-
       <div class="faq-item">
         <button class="faq-question" aria-expanded="false">
           <span class="faq-q-text">How far is The Island Garden Hotel from Nassau Airport (LPIA)?</span>
@@ -824,7 +819,6 @@
         </button>
         <div class="faq-answer">We're approximately 10–15 minutes from Lynden Pindling International Airport (LPIA) by car. We offer an airport shuttle service — just let us know your arrival time when booking and we'll arrange a transfer for you.</div>
       </div>
-
     </div>
   </div>
 </section>
@@ -836,24 +830,13 @@
     <h2 class="section-title">Skip the Middleman.<br><em>Book Direct &amp; Save.</em></h2>
     <p class="section-body">When you book directly with us, you always get the lowest available rate — no OTA commissions, no markup, no hidden fees. Just an honest price for a great Nassau stay.</p>
     <div class="cta-perks">
-      <span class="cta-perk">
-        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-        Best Rate Guaranteed
-      </span>
-      <span class="cta-perk">
-        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-        No Hidden Fees
-      </span>
-      <span class="cta-perk">
-        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-        Flexible Cancellation
-      </span>
-      <span class="cta-perk">
-        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-        Direct Support
-      </span>
+      <span class="cta-perk"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Best Rate Guaranteed</span>
+      <span class="cta-perk"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>No Hidden Fees</span>
+      <span class="cta-perk"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Flexible Cancellation</span>
+      <span class="cta-perk"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Direct Support</span>
     </div>
-    <a href="https://us2.cloudbeds.com/en/reservation/lPXE9c?currency=usd" target="_blank" class="btn-primary" style="font-size:0.84rem; padding:17px 48px;">Reserve Your Room →</a>
+    <!-- CLOUDBEDS: Final CTA Reserve button -->
+    <button class="btn-primary" data-be-url="https://us2.cloudbeds.com/reservation/lPXE9c" style="font-size:0.84rem; padding:17px 48px;">Reserve Your Room →</button>
   </div>
 </section>
 
@@ -876,10 +859,10 @@
       </div>
       <div class="footer-col">
         <h4>Rooms</h4>
-        <a href="https://us2.cloudbeds.com/en/reservation/lPXE9c" target="_blank">Queen Room — from $89</a>
-        <a href="https://us2.cloudbeds.com/en/reservation/lPXE9c" target="_blank">Patio Room — from $109</a>
-        <a href="https://us2.cloudbeds.com/en/reservation/lPXE9c" target="_blank">Balcony Room — from $129</a>
-        <a href="https://us2.cloudbeds.com/en/reservation/lPXE9c" target="_blank">Check Availability</a>
+        <a href="#" data-be-url="https://us2.cloudbeds.com/reservation/lPXE9c">Queen Room — from $89</a>
+        <a href="#" data-be-url="https://us2.cloudbeds.com/reservation/lPXE9c">Patio Room — from $109</a>
+        <a href="#" data-be-url="https://us2.cloudbeds.com/reservation/lPXE9c">Balcony Room — from $129</a>
+        <a href="#" data-be-url="https://us2.cloudbeds.com/reservation/lPXE9c">Check Availability</a>
       </div>
       <div class="footer-col footer-contact">
         <h4>Contact</h4>
@@ -897,11 +880,75 @@
 </footer>
 
 <script>
+  // ═══════════════════════════════════════════════════════
+  // CLOUDBEDS IMMERSIVE WIDGET — DATE PASSING & TRIGGERS
+  // ═══════════════════════════════════════════════════════
+
+  const CB_BASE_URL = 'https://us2.cloudbeds.com/reservation/lPXE9c';
+
+  // Format a Date object to YYYY-MM-DD
+  function formatDate(d) {
+    return d.toISOString().split('T')[0];
+  }
+
+  // Set default dates in booking bar
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const checkoutDefault = new Date(tomorrow);
+  checkoutDefault.setDate(checkoutDefault.getDate() + 2);
+  document.getElementById('checkin').value  = formatDate(tomorrow);
+  document.getElementById('checkout').value = formatDate(checkoutDefault);
+
+  // Build Cloudbeds URL with dates from booking bar
+  function buildUrlWithDates() {
+    const checkin  = document.getElementById('checkin').value;
+    const checkout = document.getElementById('checkout').value;
+    let url = CB_BASE_URL;
+    if (checkin && checkout) {
+      url += '?checkin=' + checkin + '&checkout=' + checkout;
+    }
+    return url;
+  }
+
+  // Open Cloudbeds Immersive widget
+  // The Cloudbeds widget listens for clicks on [data-be-url] automatically,
+  // but we also manually update the data-be-url on the check availability
+  // button before the click so it carries the selected dates.
+  function openBookingWithDates() {
+    const url = buildUrlWithDates();
+    // Update the button's data-be-url so the widget picks up the dates
+    const btn = document.getElementById('bbCheckBtn');
+    btn.setAttribute('data-be-url', url);
+    // Trigger a real click so the Cloudbeds widget intercepts it
+    btn.click();
+  }
+
+  // Check Availability button in booking bar
+  document.getElementById('bbCheckBtn').setAttribute('data-be-url', CB_BASE_URL);
+  document.getElementById('bbCheckBtn').addEventListener('click', function(e) {
+    // Update URL with current date values before Cloudbeds widget fires
+    const url = buildUrlWithDates();
+    this.setAttribute('data-be-url', url);
+    // Cloudbeds widget handles the actual open from here
+  });
+
+  // Also update the bbCheckBtn URL whenever dates change
+  document.getElementById('checkin').addEventListener('change', function() {
+    document.getElementById('bbCheckBtn').setAttribute('data-be-url', buildUrlWithDates());
+  });
+  document.getElementById('checkout').addEventListener('change', function() {
+    document.getElementById('bbCheckBtn').setAttribute('data-be-url', buildUrlWithDates());
+  });
+
+  // ═══════════════════════════════════════════════════════
+  // NAV & UI
+  // ═══════════════════════════════════════════════════════
+
   // Nav scroll shadow
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 40));
 
-  // Hamburger
+  // Hamburger menu
   const hamburger = document.getElementById('hamburger');
   const drawer    = document.getElementById('navDrawer');
   hamburger.addEventListener('click', () => {
@@ -914,13 +961,12 @@
     navbar.classList.remove('menu-open');
     document.body.style.overflow = '';
   }));
-
-  // Default dates
-  const tomorrow = new Date(); tomorrow.setDate(tomorrow.getDate() + 1);
-  const co = new Date(tomorrow); co.setDate(co.getDate() + 2);
-  const fmt = d => d.toISOString().split('T')[0];
-  document.getElementById('checkin').value  = fmt(tomorrow);
-  document.getElementById('checkout').value = fmt(co);
+  // Close drawer when mobile book button clicked
+  drawer.querySelectorAll('button').forEach(btn => btn.addEventListener('click', () => {
+    drawer.classList.remove('open');
+    navbar.classList.remove('menu-open');
+    document.body.style.overflow = '';
+  }));
 
   // FAQ accordion
   document.querySelectorAll('.faq-question').forEach(btn => {
