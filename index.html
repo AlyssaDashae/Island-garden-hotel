@@ -64,9 +64,9 @@ nav.menu-open .nav-hamburger span:nth-child(3){transform:translateY(-7px) rotate
 .hero-content{position:relative;z-index:2;padding:0 72px 80px;animation:fadeUp 1.1s ease both;max-width:760px}
 @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
 .hero-eyebrow{font-size:.68rem;font-weight:500;letter-spacing:.26em;text-transform:uppercase;color:rgba(255,255,255,.72);margin-bottom:14px}
-.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,7vw,5.6rem);font-weight:300;color:white;line-height:1.06;margin-bottom:20px}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,7vw,5.6rem);font-weight:300;color:white;line-height:1.06;margin-bottom:20px;text-shadow:0 2px 24px rgba(0,0,0,0.55)}
 .hero-title em{font-style:italic;color:#A8D8E0}
-.hero-sub{font-size:clamp(.88rem,2vw,1rem);font-weight:300;color:rgba(255,255,255,.8);max-width:460px;line-height:1.78;margin-bottom:34px}
+.hero-sub{font-size:clamp(.88rem,2vw,1rem);font-weight:300;color:rgba(255,255,255,.8);max-width:460px;line-height:1.78;margin-bottom:34px;text-shadow:0 1px 10px rgba(0,0,0,0.45)}
 .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
 
 /* BOOKING BAR */
@@ -78,6 +78,8 @@ nav.menu-open .nav-hamburger span:nth-child(3){transform:translateY(-7px) rotate
 .bb-input{background:none;border:none;outline:none;color:white;font-family:'Jost',sans-serif;font-size:.87rem;width:100%;color-scheme:dark}
 .bb-input::placeholder{color:rgba(255,255,255,.5)}
 .bb-input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(1) opacity(.55);cursor:pointer}
+.bb-select{background:none;border:none;outline:none;color:white;font-family:'Jost',sans-serif;font-size:.87rem;width:100%;color-scheme:dark;-webkit-appearance:none;appearance:none;cursor:pointer}
+.bb-select option{background:var(--ocean-deep);color:white}
 .bb-btn{background:var(--coral);color:white;border:none;padding:0 30px;font-size:.76rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:background .2s;white-space:nowrap;min-height:54px;flex-shrink:0}
 .bb-btn:hover{background:var(--coral-light)}
 .direct-badge{text-align:center;background:var(--ocean);padding:10px 20px;font-size:.69rem;color:rgba(255,255,255,.75);letter-spacing:.05em}
@@ -198,13 +200,6 @@ footer{background:#141414;color:rgba(255,255,255,.5);padding:60px 48px 28px}
 .footer-bottom a{color:rgba(255,255,255,.35);text-decoration:none}
 .footer-bottom a:hover{color:white}
 
-/* FOOTER LINKS — never show as orange buttons */
-footer a[data-be-url]{background:none!important;color:rgba(255,255,255,.5)!important;border:none!important;padding:0!important;display:block!important;font-size:.79rem!important;font-weight:300!important;text-decoration:none!important;margin-bottom:9px!important}
-footer a[data-be-url]:hover{color:white!important;background:none!important;transform:none!important;box-shadow:none!important}
-/* Hero text contrast */
-.hero-title{text-shadow:0 2px 24px rgba(0,0,0,0.55)}
-.hero-sub{text-shadow:0 1px 10px rgba(0,0,0,0.45)}
-
 /* COUPON */
 .coupon-feedback{font-size:.6rem;letter-spacing:.08em;margin-top:2px;min-height:14px}
 .coupon-feedback.valid{color:#6ee7b7}
@@ -253,9 +248,7 @@ footer a[data-be-url]:hover{color:white!important;background:none!important;tran
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
 
-/* ══════════════════════════════════
-   TABLET ≤1024px
-══════════════════════════════════ */
+/* TABLET */
 @media(max-width:1024px){
   :root{--nav-h:72px}
   .nav-inner{padding:0 32px}
@@ -276,9 +269,7 @@ footer a[data-be-url]:hover{color:white!important;background:none!important;tran
   .footer-grid{grid-template-columns:1fr 1fr;gap:36px}
 }
 
-/* ══════════════════════════════════
-   MOBILE ≤768px
-══════════════════════════════════ */
+/* MOBILE */
 @media(max-width:768px){
   :root{--nav-h:64px}
   .nav-inner{padding:0 18px}
@@ -324,9 +315,7 @@ footer a[data-be-url]:hover{color:white!important;background:none!important;tran
   .footer-bottom{flex-direction:column;align-items:flex-start;gap:8px}
 }
 
-/* ══════════════════════════════════
-   SMALL MOBILE ≤480px
-══════════════════════════════════ */
+/* SMALL MOBILE */
 @media(max-width:480px){
   .amenities-grid{grid-template-columns:1fr}
   .gallery-strip{grid-template-columns:1fr}
@@ -412,8 +401,23 @@ footer a[data-be-url]:hover{color:white!important;background:none!important;tran
       <input type="date" class="bb-input" id="checkout">
     </div>
     <div class="bb-field">
-      <label class="bb-label" for="guests">Guests</label>
-      <input type="text" class="bb-input" id="guests" placeholder="2 Adults">
+      <label class="bb-label" for="adults">Adults</label>
+      <select class="bb-select" id="adults">
+        <option value="1">1 Adult</option>
+        <option value="2" selected>2 Adults</option>
+        <option value="3">3 Adults</option>
+        <option value="4">4 Adults</option>
+      </select>
+    </div>
+    <div class="bb-field">
+      <label class="bb-label" for="children">Children</label>
+      <select class="bb-select" id="children">
+        <option value="0" selected>0 Children</option>
+        <option value="1">1 Child</option>
+        <option value="2">2 Children</option>
+        <option value="3">3 Children</option>
+        <option value="4">4 Children</option>
+      </select>
     </div>
     <div class="bb-field">
       <label class="bb-label" for="coupon">Promo Code</label>
@@ -585,6 +589,18 @@ footer a[data-be-url]:hover{color:white!important;background:none!important;tran
           </div>
         </div>
       </article>
+      <article class="room-card reveal">
+        <div class="room-img-wrap"><img class="room-img" src="https://h-img2.us2.cloudbeds.com/uploads/32901098274951/4da771ab-9017-41da-84bd-bfe64a7a308b~~68193bff677a2.jpeg" alt="Twin Room" loading="lazy"></div>
+        <div class="room-info">
+          <h3 class="room-name">Twin Room</h3>
+          <p class="room-desc">Two comfortable single beds — ideal for friends travelling together, colleagues, or family members who prefer their own sleeping space. All the comfort, none of the compromise.</p>
+          <div class="room-tags"><span class="room-tag">2 Twin Beds</span><span class="room-tag">WiFi</span><span class="room-tag">Smart TV</span><span class="room-tag">AC</span><span class="room-tag">Mini Fridge</span></div>
+          <div class="room-footer">
+            <div class="room-price">From $130 <small>/ night</small></div>
+            <button class="btn-text-coral" data-be-url="https://us2.cloudbeds.com/reservation/lPXE9c">Book Now →</button>
+          </div>
+        </div>
+      </article>
     </div>
     <div class="rooms-mobile-cta">
       <button class="btn-coral" data-be-url="https://us2.cloudbeds.com/reservation/lPXE9c">View All Rooms &amp; Book</button>
@@ -631,7 +647,6 @@ footer a[data-be-url]:hover{color:white!important;background:none!important;tran
     </div>
   </div>
 </section>
-
 
 <!-- FAQ -->
 <section id="faq" class="faq-section">
@@ -686,6 +701,7 @@ footer a[data-be-url]:hover{color:white!important;background:none!important;tran
       <a href="#rooms">Queen Room — from $130</a>
       <a href="#rooms">Patio Room — from $140</a>
       <a href="#rooms">Balcony Room — from $155</a>
+      <a href="#rooms">Twin Room — from $130</a>
       <a href="#rooms">Check Availability</a>
     </div>
     <div class="footer-col footer-contact">
@@ -702,65 +718,54 @@ footer a[data-be-url]:hover{color:white!important;background:none!important;tran
   </div>
 </footer>
 
-
 <script>
-// VALID PROMO CODES
-const PROMO_CODES = {
-  'LOCAL242':   { label: '✓ Local Rate applied — $97.50/night (2-night min)', valid: true },
-  'EASTER2026': { label: '✓ Easter Rate applied — $100/night (2-night min)',  valid: true }
+const PROMO_CODES={
+  'LOCAL242':{label:'✓ Local Rate applied — $97.50/night (2-night min)',valid:true},
+  'EASTER2026':{label:'✓ Easter Rate applied — $100/night (2-night min)',valid:true}
 };
-
-// CLOUDBEDS DATE PASSING
 const CB_BASE='https://us2.cloudbeds.com/reservation/lPXE9c';
 function fmtDate(d){return d.toISOString().split('T')[0]}
 const tom=new Date();tom.setDate(tom.getDate()+1);
 const co2=new Date(tom);co2.setDate(co2.getDate()+2);
 document.getElementById('checkin').value=fmtDate(tom);
 document.getElementById('checkout').value=fmtDate(co2);
-
 function buildUrl(){
   const ci=document.getElementById('checkin').value;
   const co=document.getElementById('checkout').value;
+  const adults=document.getElementById('adults').value;
+  const children=document.getElementById('children').value;
   const coupon=document.getElementById('coupon').value.trim().toUpperCase();
   let url=(ci&&co)?`${CB_BASE}?checkin=${ci}&checkout=${co}`:CB_BASE;
-  if(coupon && PROMO_CODES[coupon]) url+=`&coupon=${encodeURIComponent(coupon)}`;
+  url+=`&adults=${adults}`;
+  if(children>0) url+=`&children=${children}`;
+  if(coupon&&PROMO_CODES[coupon]) url+=`&coupon=${encodeURIComponent(coupon)}`;
   return url;
 }
-
-// Coupon validation on input
-document.getElementById('coupon').addEventListener('input', function(){
-  const val = this.value.trim().toUpperCase();
-  this.value = val;
-  const fb = document.getElementById('couponFeedback');
-  if(!val){ fb.textContent=''; fb.className='coupon-feedback'; return; }
-  if(PROMO_CODES[val]){
-    fb.textContent = PROMO_CODES[val].label;
-    fb.className = 'coupon-feedback valid';
-  } else {
-    fb.textContent = '✗ Invalid code — check spelling';
-    fb.className = 'coupon-feedback invalid';
-  }
+document.getElementById('coupon').addEventListener('input',function(){
+  const val=this.value.trim().toUpperCase();
+  this.value=val;
+  const fb=document.getElementById('couponFeedback');
+  if(!val){fb.textContent='';fb.className='coupon-feedback';return;}
+  if(PROMO_CODES[val]){fb.textContent=PROMO_CODES[val].label;fb.className='coupon-feedback valid';}
+  else{fb.textContent='✗ Invalid code — check spelling';fb.className='coupon-feedback invalid';}
 });
-
 const bbBtn=document.getElementById('bbCheckBtn');
 bbBtn.setAttribute('data-be-url',CB_BASE);
 bbBtn.addEventListener('click',function(){this.setAttribute('data-be-url',buildUrl())});
 document.getElementById('checkin').addEventListener('change',()=>bbBtn.setAttribute('data-be-url',buildUrl()));
 document.getElementById('checkout').addEventListener('change',()=>bbBtn.setAttribute('data-be-url',buildUrl()));
-
-// COPY PROMO CODE
-function copyCode(el, code){
+document.getElementById('adults').addEventListener('change',()=>bbBtn.setAttribute('data-be-url',buildUrl()));
+document.getElementById('children').addEventListener('change',()=>bbBtn.setAttribute('data-be-url',buildUrl()));
+function copyCode(el,code){
   navigator.clipboard.writeText(code).catch(()=>{});
   const hint=el.querySelector('.promo-copy-hint');
   const done=el.querySelector('.promo-copy-done');
-  hint.style.display='none'; done.style.display='block';
+  hint.style.display='none';done.style.display='block';
   const couponInput=document.getElementById('coupon');
   couponInput.value=code;
   couponInput.dispatchEvent(new Event('input'));
-  setTimeout(()=>{ hint.style.display=''; done.style.display='none'; }, 2500);
+  setTimeout(()=>{hint.style.display='';done.style.display='none';},2500);
 }
-
-// NAV
 const navbar=document.getElementById('navbar');
 const hamburger=document.getElementById('hamburger');
 const drawer=document.getElementById('navDrawer');
@@ -775,8 +780,6 @@ drawer.querySelectorAll('a,button').forEach(el=>el.addEventListener('click',()=>
   navbar.classList.remove('menu-open');
   document.body.style.overflow='';
 }));
-
-// FAQ
 document.querySelectorAll('.faq-btn').forEach(btn=>{
   btn.addEventListener('click',()=>{
     const item=btn.closest('.faq-item');
@@ -785,8 +788,6 @@ document.querySelectorAll('.faq-btn').forEach(btn=>{
     if(!isOpen){item.classList.add('open');btn.setAttribute('aria-expanded','true')}
   });
 });
-
-// SCROLL REVEAL
 const obs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}});
 },{threshold:0.08});
