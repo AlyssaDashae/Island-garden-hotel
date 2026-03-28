@@ -198,6 +198,25 @@ footer{background:#141414;color:rgba(255,255,255,.5);padding:60px 48px 28px}
 .footer-bottom a{color:rgba(255,255,255,.35);text-decoration:none}
 .footer-bottom a:hover{color:white}
 
+/* CLOUDBEDS WIDGET BUTTON OVERRIDE — force coral color */
+[data-be-url],
+button[data-be-url],
+a[data-be-url] {
+  background: var(--coral) !important;
+  color: white !important;
+  border-color: var(--coral) !important;
+}
+button[data-be-url]:hover,
+a[data-be-url]:hover {
+  background: var(--coral-light) !important;
+  border-color: var(--coral-light) !important;
+}
+/* Override any Cloudbeds injected styles */
+.be-button, .be-btn, [class*="be-book"], [class*="booking-btn"] {
+  background: var(--coral) !important;
+  color: white !important;
+}
+
 /* COUPON */
 .coupon-feedback{font-size:.6rem;letter-spacing:.08em;margin-top:2px;min-height:14px}
 .coupon-feedback.valid{color:#6ee7b7}
@@ -384,7 +403,7 @@ footer{background:#141414;color:rgba(255,255,255,.5);padding:60px 48px 28px}
   <div class="hero-bg"></div>
   <div class="hero-content">
     <p class="hero-eyebrow">Nassau, Bahamas · West Bay Street · Near Cable Beach</p>
-    <h1 class="hero-title">Affordable Luxury<br>in <em>Nassau</em></h1>
+    <h1 class="hero-title">Your Home Away<br>from <em>Home</em></h1>
     <p class="hero-sub">Boutique comfort from $89/night — tropical gardens, a sparkling pool, and genuine Bahamian warmth steps from Cable Beach.</p>
     <div class="hero-actions">
       <button class="btn-coral" data-be-url="https://us2.cloudbeds.com/reservation/lPXE9c">Book Direct &amp; Save</button>
