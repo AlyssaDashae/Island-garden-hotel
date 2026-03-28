@@ -198,6 +198,50 @@ footer{background:#141414;color:rgba(255,255,255,.5);padding:60px 48px 28px}
 .footer-bottom a{color:rgba(255,255,255,.35);text-decoration:none}
 .footer-bottom a:hover{color:white}
 
+/* COUPON */
+.coupon-feedback{font-size:.6rem;letter-spacing:.08em;margin-top:2px;min-height:14px}
+.coupon-feedback.valid{color:#6ee7b7}
+.coupon-feedback.invalid{color:#fca5a5}
+
+/* PROMOTIONS SECTION */
+.promos-section{background:linear-gradient(135deg,var(--ocean-deep) 0%,#0a3d48 100%);padding:80px 48px;position:relative;overflow:hidden}
+.promos-section::before{content:'';position:absolute;top:-60px;right:-60px;width:300px;height:300px;background:rgba(255,255,255,.03);border-radius:50%}
+.promos-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1}
+.promos-header{text-align:center;margin-bottom:48px}
+.promos-header .section-eyebrow{color:var(--ocean-light)}
+.promos-header .section-title{color:white}
+.promos-header .section-title em{color:#A8D8E0}
+.promos-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.promo-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:32px;position:relative;overflow:hidden;transition:background .2s,transform .2s}
+.promo-card:hover{background:rgba(255,255,255,.09);transform:translateY(-3px)}
+.promo-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--coral)}
+.promo-badge{display:inline-flex;align-items:center;gap:6px;background:var(--coral);color:white;font-size:.6rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:16px}
+.promo-badge.local{background:var(--ocean)}
+.promo-title{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:300;color:white;margin-bottom:8px;line-height:1.2}
+.promo-desc{font-size:.82rem;font-weight:300;color:rgba(255,255,255,.65);line-height:1.7;margin-bottom:20px}
+.promo-details{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+.promo-detail{display:flex;align-items:center;gap:8px;font-size:.78rem;color:rgba(255,255,255,.8)}
+.promo-detail svg{stroke:var(--coral-light);flex-shrink:0;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.promo-price-row{display:flex;align-items:flex-end;gap:8px;margin-bottom:20px}
+.promo-price{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:300;color:white;line-height:1}
+.promo-price small{font-family:'Jost',sans-serif;font-size:.72rem;color:rgba(255,255,255,.5);font-weight:300}
+.promo-code-box{background:rgba(255,255,255,.08);border:1px dashed rgba(255,255,255,.25);border-radius:6px;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;cursor:pointer;transition:background .2s;user-select:none}
+.promo-code-box:hover{background:rgba(255,255,255,.13)}
+.promo-code-label{font-size:.58rem;color:rgba(255,255,255,.45);letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:2px}
+.promo-code-val{font-size:.88rem;font-weight:600;color:white;letter-spacing:.1em}
+.promo-copy-hint{font-size:.6rem;color:rgba(255,255,255,.4)}
+.promo-copy-done{font-size:.6rem;color:#6ee7b7;display:none}
+.promo-expires{font-size:.68rem;color:rgba(255,255,255,.38);margin-top:10px}
+@media(max-width:768px){
+  .promos-section{padding:56px 18px}
+  .promos-grid{grid-template-columns:1fr;gap:16px}
+  .promo-card{padding:24px}
+}
+@media(max-width:1024px){
+  .promos-section{padding:64px 32px}
+  .promos-grid{grid-template-columns:1fr 1fr}
+}
+
 /* REVEAL ANIMATION */
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
@@ -314,6 +358,7 @@ footer{background:#141414;color:rgba(255,255,255,.5);padding:60px 48px 28px}
     <div class="nav-links">
       <a href="#about">About</a>
       <a href="#rooms">Rooms</a>
+      <a href="#promotions">Promotions</a>
       <a href="#amenities">Amenities</a>
       <a href="#location">Location</a>
       <a href="#faq">FAQ</a>
@@ -326,6 +371,7 @@ footer{background:#141414;color:rgba(255,255,255,.5);padding:60px 48px 28px}
   <div class="nav-drawer" id="navDrawer">
     <a href="#about">About</a>
     <a href="#rooms">Rooms</a>
+    <a href="#promotions">Promotions</a>
     <a href="#amenities">Amenities</a>
     <a href="#location">Location</a>
     <a href="#faq">FAQ</a>
@@ -362,6 +408,11 @@ footer{background:#141414;color:rgba(255,255,255,.5);padding:60px 48px 28px}
       <label class="bb-label" for="guests">Guests</label>
       <input type="text" class="bb-input" id="guests" placeholder="2 Adults">
     </div>
+    <div class="bb-field">
+      <label class="bb-label" for="coupon">Promo Code</label>
+      <input type="text" class="bb-input" id="coupon" placeholder="Enter code" autocomplete="off" style="text-transform:uppercase">
+      <span class="coupon-feedback" id="couponFeedback"></span>
+    </div>
     <button class="bb-btn" id="bbCheckBtn">Check Availability</button>
   </div>
 </div>
@@ -375,6 +426,82 @@ footer{background:#141414;color:rgba(255,255,255,.5);padding:60px 48px 28px}
   <div class="trust-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92V19a2 2 0 0 1-2.18 2A19.9 19.9 0 0 1 2.82 5.18 2 2 0 0 1 4.8 3H7.1a2 2 0 0 1 2 1.7c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 10.9a16 16 0 0 0 5.66 5.66l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.9z"/></svg>Airport Shuttle</div>
   <div class="trust-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1" fill="currentColor"/></svg>Free WiFi</div>
 </div>
+
+<!-- PROMOTIONS -->
+<section id="promotions" class="promos-section">
+  <div class="promos-inner">
+    <div class="promos-header">
+      <p class="section-eyebrow">Limited Time Offers</p>
+      <h2 class="section-title">Current <em>Promotions</em></h2>
+      <p style="font-size:.9rem;color:rgba(255,255,255,.6);font-weight:300;max-width:480px;margin:0 auto;line-height:1.7;">Book direct and use your promo code at checkout. Minimum 2-night stay required for all promotional rates.</p>
+    </div>
+    <div class="promos-grid">
+
+      <!-- LOCAL BAHAMIAN RATE -->
+      <div class="promo-card reveal">
+        <span class="promo-badge local">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Bahamian Residents
+        </span>
+        <h3 class="promo-title">Local Rate</h3>
+        <p class="promo-desc">A special rate exclusively for Bahamian residents. Show your love for home — enjoy island comfort at a price made just for you.</p>
+        <div class="promo-details">
+          <div class="promo-detail"><svg width="15" height="15" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Minimum 2-night stay required</div>
+          <div class="promo-detail"><svg width="15" height="15" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Valid Bahamian ID required at check-in</div>
+          <div class="promo-detail"><svg width="15" height="15" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>All amenities included — pool, WiFi, parking</div>
+          <div class="promo-detail"><svg width="15" height="15" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Book direct only — not available on OTAs</div>
+        </div>
+        <div class="promo-price-row">
+          <div class="promo-price">$97.50 <small>/ night</small></div>
+        </div>
+        <div class="promo-code-box" onclick="copyCode(this,'LOCAL242')">
+          <div>
+            <span class="promo-code-label">Your Promo Code</span>
+            <span class="promo-code-val">LOCAL242</span>
+          </div>
+          <div>
+            <span class="promo-copy-hint">📋 Tap to copy</span>
+            <span class="promo-copy-done">✓ Copied!</span>
+          </div>
+        </div>
+        <button class="btn-coral" style="width:100%;justify-content:center;" data-be-url="https://us2.cloudbeds.com/reservation/lPXE9c">Book This Rate →</button>
+        <p class="promo-expires">Valid ID required at check-in · Subject to availability</p>
+      </div>
+
+      <!-- EASTER RATE -->
+      <div class="promo-card easter reveal">
+        <span class="promo-badge">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Limited Time
+        </span>
+        <h3 class="promo-title">Easter Special</h3>
+        <p class="promo-desc">Celebrate Easter in the Bahamas! A flat rate for everyone — families, couples, solo travellers — for the holiday season. Pool, gardens, and island sun included.</p>
+        <div class="promo-details">
+          <div class="promo-detail"><svg width="15" height="15" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Minimum 2-night stay required</div>
+          <div class="promo-detail"><svg width="15" height="15" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Available to all guests — no restrictions</div>
+          <div class="promo-detail"><svg width="15" height="15" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>All amenities included — pool, WiFi, parking</div>
+          <div class="promo-detail"><svg width="15" height="15" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Book direct only — best rate guaranteed</div>
+        </div>
+        <div class="promo-price-row">
+          <div class="promo-price">$100.00 <small>/ night</small></div>
+        </div>
+        <div class="promo-code-box" onclick="copyCode(this,'EASTER2026')">
+          <div>
+            <span class="promo-code-label">Your Promo Code</span>
+            <span class="promo-code-val">EASTER2026</span>
+          </div>
+          <div>
+            <span class="promo-copy-hint">📋 Tap to copy</span>
+            <span class="promo-copy-done">✓ Copied!</span>
+          </div>
+        </div>
+        <button class="btn-coral" style="width:100%;justify-content:center;" data-be-url="https://us2.cloudbeds.com/reservation/lPXE9c">Book This Rate →</button>
+        <p class="promo-expires">Easter season · Subject to availability · 2-night minimum</p>
+      </div>
+
+    </div>
+  </div>
+</section>
 
 <!-- ABOUT -->
 <section id="about" class="about-section">
@@ -492,7 +619,7 @@ footer{background:#141414;color:rgba(255,255,255,.5);padding:60px 48px 28px}
         <div class="loc-list">
           <div class="loc-item reveal"><div class="loc-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div class="loc-info"><strong>483 West Bay Street</strong><span>Nassau, New Providence, Bahamas</span></div></div>
           <div class="loc-item reveal"><div class="loc-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92V19a2 2 0 0 1-2.18 2A19.9 19.9 0 0 1 2.82 5.18 2 2 0 0 1 4.8 3H7.1a2 2 0 0 1 2 1.7c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 10.9a16 16 0 0 0 5.66 5.66l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.9z"/></svg></div><div class="loc-info"><strong>+1 (242) 327-6364</strong><span>Call or WhatsApp — always happy to help</span></div></div>
-          <div class="loc-item reveal"><div class="loc-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div class="loc-info"><strong>Theislandgarden242@gmail.com</strong><span>Email for group bookings or special requests</span></div></div>
+          <div class="loc-item reveal"><div class="loc-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div class="loc-info"><strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3c685459554f505d52585b5d4e5859520e080e7c5b515d5550125f5351">[email&#160;protected]</a></strong><span>Email for group bookings or special requests</span></div></div>
           <div class="loc-item reveal"><div class="loc-icon"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-9"/></svg></div><div class="loc-info"><strong>Steps from Cable Beach</strong><span>Nassau's most famous stretch of white sand &amp; turquoise water</span></div></div>
         </div>
       </div>
@@ -562,7 +689,7 @@ footer{background:#141414;color:rgba(255,255,255,.5);padding:60px 48px 28px}
       <h4>Contact</h4>
       483 West Bay Street<br>Nassau, New Providence, BS<br><br>
       <a href="tel:+12423276364">+1 (242) 327-6364</a><br>
-      <a href="mailto:Theislandgarden242@gmail.com">Theislandgarden242@gmail.com</a><br><br>
+      <a href="/cdn-cgi/l/email-protection#9cc8f4f9f5eff0fdf2f8fbfdeef8f9f2aea8aedcfbf1fdf5f0b2fff3f1"><span class="__cf_email__" data-cfemail="0d596568647e616c63696a6c7f6968633f393f4d6a606c6461236e6260">[email&#160;protected]</span></a><br><br>
       Check-in: 3:00 PM · Check-out: 12:00 PM
     </div>
   </div>
@@ -572,7 +699,14 @@ footer{background:#141414;color:rgba(255,255,255,.5);padding:60px 48px 28px}
   </div>
 </footer>
 
+
 <script>
+// VALID PROMO CODES
+const PROMO_CODES = {
+  'LOCAL242':   { label: '✓ Local Rate applied — $97.50/night (2-night min)', valid: true },
+  'EASTER2026': { label: '✓ Easter Rate applied — $100/night (2-night min)',  valid: true }
+};
+
 // CLOUDBEDS DATE PASSING
 const CB_BASE='https://us2.cloudbeds.com/reservation/lPXE9c';
 function fmtDate(d){return d.toISOString().split('T')[0]}
@@ -580,16 +714,48 @@ const tom=new Date();tom.setDate(tom.getDate()+1);
 const co2=new Date(tom);co2.setDate(co2.getDate()+2);
 document.getElementById('checkin').value=fmtDate(tom);
 document.getElementById('checkout').value=fmtDate(co2);
+
 function buildUrl(){
   const ci=document.getElementById('checkin').value;
   const co=document.getElementById('checkout').value;
-  return(ci&&co)?`${CB_BASE}?checkin=${ci}&checkout=${co}`:CB_BASE;
+  const coupon=document.getElementById('coupon').value.trim().toUpperCase();
+  let url=(ci&&co)?`${CB_BASE}?checkin=${ci}&checkout=${co}`:CB_BASE;
+  if(coupon && PROMO_CODES[coupon]) url+=`&coupon=${encodeURIComponent(coupon)}`;
+  return url;
 }
+
+// Coupon validation on input
+document.getElementById('coupon').addEventListener('input', function(){
+  const val = this.value.trim().toUpperCase();
+  this.value = val;
+  const fb = document.getElementById('couponFeedback');
+  if(!val){ fb.textContent=''; fb.className='coupon-feedback'; return; }
+  if(PROMO_CODES[val]){
+    fb.textContent = PROMO_CODES[val].label;
+    fb.className = 'coupon-feedback valid';
+  } else {
+    fb.textContent = '✗ Invalid code — check spelling';
+    fb.className = 'coupon-feedback invalid';
+  }
+});
+
 const bbBtn=document.getElementById('bbCheckBtn');
 bbBtn.setAttribute('data-be-url',CB_BASE);
 bbBtn.addEventListener('click',function(){this.setAttribute('data-be-url',buildUrl())});
 document.getElementById('checkin').addEventListener('change',()=>bbBtn.setAttribute('data-be-url',buildUrl()));
 document.getElementById('checkout').addEventListener('change',()=>bbBtn.setAttribute('data-be-url',buildUrl()));
+
+// COPY PROMO CODE
+function copyCode(el, code){
+  navigator.clipboard.writeText(code).catch(()=>{});
+  const hint=el.querySelector('.promo-copy-hint');
+  const done=el.querySelector('.promo-copy-done');
+  hint.style.display='none'; done.style.display='block';
+  const couponInput=document.getElementById('coupon');
+  couponInput.value=code;
+  couponInput.dispatchEvent(new Event('input'));
+  setTimeout(()=>{ hint.style.display=''; done.style.display='none'; }, 2500);
+}
 
 // NAV
 const navbar=document.getElementById('navbar');
