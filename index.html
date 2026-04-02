@@ -325,6 +325,25 @@ footer{background:#141414;color:rgba(255,255,255,.5);padding:60px 48px 28px}
   .trust-item:last-child{border-bottom:none}
   .hero-actions .btn-coral,.hero-actions .btn-ghost-white{max-width:100%}
 }
+
+/* BOOKING MODAL */
+.modal-backdrop{display:none;position:fixed;inset:0;z-index:1000;background:rgba(13,74,87,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:20px}
+.modal-backdrop.open{display:flex}
+.modal-box{background:white;border-radius:8px;overflow:hidden;width:100%;max-width:900px;max-height:90vh;display:flex;flex-direction:column;box-shadow:0 32px 80px rgba(0,0,0,.35);animation:modalIn .25s ease both}
+@keyframes modalIn{from{opacity:0;transform:translateY(24px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+.modal-header{background:var(--ocean-deep);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.modal-title{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:300;color:white;letter-spacing:.02em}
+.modal-close{background:rgba(255,255,255,.12);border:none;color:white;width:36px;height:36px;border-radius:50%;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;flex-shrink:0}
+.modal-close:hover{background:rgba(255,255,255,.25)}
+.modal-iframe{flex:1;border:none;min-height:520px}
+.modal-loading{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:60px 20px;color:var(--text-mid);font-size:.88rem;font-weight:300;min-height:300px}
+.modal-spinner{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--ocean);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:600px){
+  .modal-backdrop{padding:0}
+  .modal-box{max-height:100vh;border-radius:0}
+  .modal-iframe{min-height:400px}
+}
 </style>
 </head>
 <body>
@@ -635,7 +654,7 @@ footer{background:#141414;color:rgba(255,255,255,.5);padding:60px 48px 28px}
         <div class="loc-list">
           <div class="loc-item reveal"><div class="loc-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div class="loc-info"><strong>483 West Bay Street</strong><span>Nassau, New Providence, Bahamas</span></div></div>
           <div class="loc-item reveal"><div class="loc-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92V19a2 2 0 0 1-2.18 2A19.9 19.9 0 0 1 2.82 5.18 2 2 0 0 1 4.8 3H7.1a2 2 0 0 1 2 1.7c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 10.9a16 16 0 0 0 5.66 5.66l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.9z"/></svg></div><div class="loc-info"><strong>+1 (242) 327-6364</strong><span>Call or WhatsApp — always happy to help</span></div></div>
-          <div class="loc-item reveal"><div class="loc-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div class="loc-info"><strong><a href="mailto:Theislandgarden242@gmail.com" style="color:white;text-decoration:none;">Theislandgarden242@gmail.com</a></strong><span>Email for group bookings or special requests</span></div></div>
+          <div class="loc-item reveal"><div class="loc-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div class="loc-info"><strong><a href="/cdn-cgi/l/email-protection#14407c717d6778757a7073756670717a262026547379757d783a777b79" style="color:white;text-decoration:none;"><span class="__cf_email__" data-cfemail="35615d505c4659545b5152544751505b070107755258545c591b565a58">[email&#160;protected]</span></a></strong><span>Email for group bookings or special requests</span></div></div>
           <div class="loc-item reveal"><div class="loc-icon"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-9"/></svg></div><div class="loc-info"><strong>Steps from Cable Beach</strong><span>Nassau's most famous stretch of white sand &amp; turquoise water</span></div></div>
         </div>
       </div>
@@ -678,6 +697,21 @@ footer{background:#141414;color:rgba(255,255,255,.5);padding:60px 48px 28px}
   </div>
 </section>
 
+<!-- BOOKING MODAL -->
+<div class="modal-backdrop" id="bookingModal" role="dialog" aria-modal="true" aria-label="Book your stay">
+  <div class="modal-box">
+    <div class="modal-header">
+      <span class="modal-title">The Island Garden Hotel — Reserve Your Room</span>
+      <button class="modal-close" id="modalClose" aria-label="Close booking">✕</button>
+    </div>
+    <div class="modal-loading" id="modalLoading">
+      <div class="modal-spinner"></div>
+      <span>Loading availability…</span>
+    </div>
+    <iframe class="modal-iframe" id="bookingFrame" src="" title="Book your stay at The Island Garden Hotel" allowpaymentrequest style="display:none"></iframe>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-grid">
@@ -706,7 +740,7 @@ footer{background:#141414;color:rgba(255,255,255,.5);padding:60px 48px 28px}
       <h4>Contact</h4>
       483 West Bay Street<br>Nassau, New Providence, BS<br><br>
       <a href="tel:+12423276364">+1 (242) 327-6364</a><br>
-      <a href="mailto:Theislandgarden242@gmail.com">Theislandgarden242@gmail.com</a><br><br>
+      <a href="/cdn-cgi/l/email-protection#96c2fef3ffe5faf7f8f2f1f7e4f2f3f8a4a2a4d6f1fbf7fffab8f5f9fb"><span class="__cf_email__" data-cfemail="a0f4c8c5c9d3ccc1cec4c7c1d2c4c5ce929492e0c7cdc1c9cc8ec3cfcd">[email&#160;protected]</span></a><br><br>
       Check-in: 3:00 PM · Check-out: 12:00 PM
     </div>
   </div>
@@ -742,6 +776,48 @@ function buildUrl(){
   return url;
 }
 
+// ── MODAL ──────────────────────────────────────────────
+const modal=document.getElementById('bookingModal');
+const frame=document.getElementById('bookingFrame');
+const loading=document.getElementById('modalLoading');
+
+function openModal(url){
+  frame.src='';
+  frame.style.display='none';
+  loading.style.display='flex';
+  modal.classList.add('open');
+  document.body.style.overflow='hidden';
+  setTimeout(()=>{
+    frame.src=url;
+    frame.onload=()=>{
+      loading.style.display='none';
+      frame.style.display='block';
+    };
+  },120);
+}
+
+function closeModal(){
+  modal.classList.remove('open');
+  document.body.style.overflow='';
+  setTimeout(()=>{frame.src='';},300);
+}
+
+document.getElementById('modalClose').addEventListener('click',closeModal);
+modal.addEventListener('click',function(e){if(e.target===modal)closeModal();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
+
+// Intercept ALL Cloudbeds links — open in modal instead of new tab
+document.addEventListener('click',function(e){
+  const link=e.target.closest('a[href*="cloudbeds.com"]');
+  if(link){e.preventDefault();openModal(link.href);}
+});
+
+// Booking bar button
+document.getElementById('bbCheckBtn').addEventListener('click',function(){
+  openModal(buildUrl());
+});
+// ── END MODAL ──────────────────────────────────────────
+
 document.getElementById('coupon').addEventListener('input',function(){
   const val=this.value.trim().toUpperCase();
   this.value=val;
@@ -749,11 +825,6 @@ document.getElementById('coupon').addEventListener('input',function(){
   if(!val){fb.textContent='';fb.className='coupon-feedback';return;}
   if(PROMO_CODES[val]){fb.textContent=PROMO_CODES[val].label;fb.className='coupon-feedback valid';}
   else{fb.textContent='✗ Invalid code — check spelling';fb.className='coupon-feedback invalid';}
-});
-
-// Booking bar — opens Cloudbeds in new tab with dates/guests/coupon
-document.getElementById('bbCheckBtn').addEventListener('click',function(){
-  window.open(buildUrl(),'_blank','noopener');
 });
 
 const navbar=document.getElementById('navbar');
