@@ -38,7 +38,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;background:rgba(253,252,250,
 nav.scrolled{box-shadow:0 2px 24px rgba(0,0,0,.09)}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:var(--nav-h);max-width:1400px;margin:0 auto}
 .nav-logo{display:flex;align-items:center;gap:13px;text-decoration:none;flex-shrink:0}
-.nav-logo-img{width:56px;height:56px;border-radius:50%;object-fit:cover;flex-shrink:0;background:#fff;mix-blend-mode:multiply}
+.nav-logo-img{width:56px;height:56px;border-radius:50%;object-fit:cover;flex-shrink:0;mix-blend-mode:multiply;background:#fff}
 .nav-logo-name{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:500;color:var(--ocean-deep);letter-spacing:.03em;display:block;line-height:1.2}
 .nav-logo-sub{font-size:.62rem;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:var(--text-light);display:block;margin-top:2px}
 .nav-links{display:flex;align-items:center;gap:28px}
@@ -226,12 +226,12 @@ footer{background:#141414;color:rgba(255,255,255,.5);padding:60px 48px 28px}
 .promo-price-row{display:flex;align-items:flex-end;gap:8px;margin-bottom:20px}
 .promo-price{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:300;color:white;line-height:1}
 .promo-price small{font-family:'Jost',sans-serif;font-size:.72rem;color:rgba(255,255,255,.5);font-weight:300}
-.promo-code-box{background:rgba(255,255,255,.08);border:1px dashed rgba(255,255,255,.25);border-radius:6px;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;cursor:pointer;transition:background .2s;user-select:none}
+.promo-code-box{background:rgba(255,255,255,.08);border:1px dashed rgba(255,255,255,.25);border-radius:6px;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;cursor:pointer;transition:background .2s;user-select:none}
 .promo-code-box:hover{background:rgba(255,255,255,.13)}
 .promo-code-label{font-size:.58rem;color:rgba(255,255,255,.45);letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:2px}
 .promo-code-val{font-size:.88rem;font-weight:600;color:white;letter-spacing:.1em}
-.promo-copy-hint{font-size:.6rem;color:rgba(255,255,255,.4)}
-.promo-copy-done{font-size:.6rem;color:#6ee7b7;display:none}
+.promo-copy-hint{font-size:.6rem;color:rgba(255,255,255,.4);white-space:nowrap;flex-shrink:0}
+.promo-copy-done{font-size:.6rem;color:#6ee7b7;display:none;white-space:nowrap;flex-shrink:0}
 .promo-expires{font-size:.68rem;color:rgba(255,255,255,.38);margin-top:10px}
 @media(max-width:768px){
   .promos-section{padding:56px 18px}
@@ -333,7 +333,7 @@ footer{background:#141414;color:rgba(255,255,255,.5);padding:60px 48px 28px}
 @keyframes modalIn{from{opacity:0;transform:translateY(32px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}
 .modal-header{background:var(--ocean-deep);padding:20px 24px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
 .modal-header-left{display:flex;align-items:center;gap:12px}
-.modal-logo-img{width:44px;height:44px;border-radius:50%;object-fit:cover;background:#fff;mix-blend-mode:multiply}
+.modal-logo-img{width:44px;height:44px;border-radius:50%;object-fit:cover;mix-blend-mode:multiply;background:#fff}
 .modal-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:400;color:white;letter-spacing:.02em;line-height:1.2}
 .modal-subtitle{font-size:.6rem;color:rgba(255,255,255,.55);letter-spacing:.12em;text-transform:uppercase;margin-top:2px}
 .modal-close{background:rgba(255,255,255,.12);border:none;color:white;width:34px;height:34px;border-radius:50%;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;flex-shrink:0}
@@ -361,7 +361,7 @@ footer{background:#141414;color:rgba(255,255,255,.5);padding:60px 48px 28px}
 .modal-book-btn{width:100%;background:var(--coral);color:white;border:none;padding:16px 24px;border-radius:6px;font-family:'Jost',sans-serif;font-size:.82rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:background .2s,transform .15s,box-shadow .2s;margin-bottom:12px}
 .modal-book-btn:hover{background:var(--coral-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(200,99,74,.35)}
 .modal-note{text-align:center;font-size:.72rem;color:var(--text-light);font-weight:300;line-height:1.6}
-@media(max-width:600px){
+@media(max-width:768px){
   .modal-backdrop{padding:12px}
   .modal-box{max-height:95vh}
   .modal-body{padding:20px 18px 18px}
@@ -664,7 +664,7 @@ footer{background:#141414;color:rgba(255,255,255,.5);padding:60px 48px 28px}
         <div class="loc-list">
           <div class="loc-item reveal"><div class="loc-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div class="loc-info"><strong>483 West Bay Street</strong><span>Nassau, New Providence, Bahamas</span></div></div>
           <div class="loc-item reveal"><div class="loc-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92V19a2 2 0 0 1-2.18 2A19.9 19.9 0 0 1 2.82 5.18 2 2 0 0 1 4.8 3H7.1a2 2 0 0 1 2 1.7c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 10.9a16 16 0 0 0 5.66 5.66l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.9z"/></svg></div><div class="loc-info"><strong>+1 (242) 327-6364</strong><span>Call or WhatsApp — always happy to help</span></div></div>
-          <div class="loc-item reveal"><div class="loc-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div class="loc-info"><strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e0b4888589938c818e8487819284858ed2d4d2a0878d81898cce838f8d">[email&#160;protected]</a></strong><span>Email for group bookings or special requests</span></div></div>
+          <div class="loc-item reveal"><div class="loc-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div class="loc-info"><strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="df8bb7bab6acb3beb1bbb8beadbbbab1edebed9fb8b2beb6b3f1bcb0b2">[email&#160;protected]</a></strong><span>Email for group bookings or special requests</span></div></div>
           <div class="loc-item reveal"><div class="loc-icon"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-9"/></svg></div><div class="loc-info"><strong>Steps from Cable Beach</strong><span>Nassau's most famous stretch of white sand &amp; turquoise water</span></div></div>
         </div>
       </div>
@@ -806,7 +806,7 @@ footer{background:#141414;color:rgba(255,255,255,.5);padding:60px 48px 28px}
       <h4>Contact</h4>
       483 West Bay Street<br>Nassau, New Providence, BS<br><br>
       <a href="tel:+12423276364">+1 (242) 327-6364</a><br>
-      <a href="/cdn-cgi/l/email-protection#03576b666a706f626d6764627167666d31373143646e626a6f2d606c6e"><span class="__cf_email__" data-cfemail="f5a19d909c8699949b9192948791909bc7c1c7b59298949c99db969a98">[email&#160;protected]</span></a><br><br>
+      <a href="/cdn-cgi/l/email-protection#80d4e8e5e9f3ece1eee4e7e1f2e4e5eeb2b4b2c0e7ede1e9ecaee3efed"><span class="__cf_email__" data-cfemail="7d291518140e111c13191a1c0f1918134f494f3d1a101c1411531e1210">[email&#160;protected]</span></a><br><br>
       Check-in: 3:00 PM · Check-out: 12:00 PM
     </div>
   </div>
