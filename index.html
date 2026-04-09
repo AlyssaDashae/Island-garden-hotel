@@ -233,14 +233,14 @@ footer{background:#141414;color:rgba(255,255,255,.5);padding:60px 48px 28px}
 .promo-copy-hint{font-size:.6rem;color:rgba(255,255,255,.4);white-space:nowrap;flex-shrink:0}
 .promo-copy-done{font-size:.6rem;color:#6ee7b7;display:none;white-space:nowrap;flex-shrink:0}
 .promo-expires{font-size:.68rem;color:rgba(255,255,255,.38);margin-top:10px}
-@media(max-width:768px){
-  .promos-section{padding:56px 18px}
-  .promos-grid{grid-template-columns:1fr;gap:16px}
-  .promo-card{padding:24px}
-}
 @media(max-width:1024px){
   .promos-section{padding:64px 32px}
   .promos-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .promos-section{padding:56px 18px}
+  .promos-grid{grid-template-columns:1fr !important;gap:16px}
+  .promo-card{padding:24px}
 }
 
 /* REVEAL ANIMATION */
@@ -361,12 +361,18 @@ footer{background:#141414;color:rgba(255,255,255,.5);padding:60px 48px 28px}
 .modal-book-btn{width:100%;background:var(--coral);color:white;border:none;padding:16px 24px;border-radius:6px;font-family:'Jost',sans-serif;font-size:.82rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:background .2s,transform .15s,box-shadow .2s;margin-bottom:12px}
 .modal-book-btn:hover{background:var(--coral-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(200,99,74,.35)}
 .modal-note{text-align:center;font-size:.72rem;color:var(--text-light);font-weight:300;line-height:1.6}
+@media(max-width:1024px){
+  .modal-row{flex-direction:column;gap:14px}
+  .modal-field-divider{display:none}
+}
 @media(max-width:768px){
   .modal-backdrop{padding:12px}
   .modal-box{max-height:95vh}
   .modal-body{padding:20px 18px 18px}
-  .modal-row{flex-direction:column;gap:14px}
+  .modal-row{flex-direction:column !important;gap:14px}
   .modal-field-divider{display:none}
+  .modal-field{width:100%}
+  .modal-input{width:100%}
 }
 </style>
 </head>
@@ -664,7 +670,7 @@ footer{background:#141414;color:rgba(255,255,255,.5);padding:60px 48px 28px}
         <div class="loc-list">
           <div class="loc-item reveal"><div class="loc-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div class="loc-info"><strong>483 West Bay Street</strong><span>Nassau, New Providence, Bahamas</span></div></div>
           <div class="loc-item reveal"><div class="loc-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92V19a2 2 0 0 1-2.18 2A19.9 19.9 0 0 1 2.82 5.18 2 2 0 0 1 4.8 3H7.1a2 2 0 0 1 2 1.7c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 10.9a16 16 0 0 0 5.66 5.66l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.9z"/></svg></div><div class="loc-info"><strong>+1 (242) 327-6364</strong><span>Call or WhatsApp — always happy to help</span></div></div>
-          <div class="loc-item reveal"><div class="loc-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div class="loc-info"><strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="df8bb7bab6acb3beb1bbb8beadbbbab1edebed9fb8b2beb6b3f1bcb0b2">[email&#160;protected]</a></strong><span>Email for group bookings or special requests</span></div></div>
+          <div class="loc-item reveal"><div class="loc-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div class="loc-info"><strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2a7e424f4359464b444e4d4b584e4f44181e186a4d474b434604494547">[email&#160;protected]</a></strong><span>Email for group bookings or special requests</span></div></div>
           <div class="loc-item reveal"><div class="loc-icon"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-9"/></svg></div><div class="loc-info"><strong>Steps from Cable Beach</strong><span>Nassau's most famous stretch of white sand &amp; turquoise water</span></div></div>
         </div>
       </div>
@@ -806,7 +812,7 @@ footer{background:#141414;color:rgba(255,255,255,.5);padding:60px 48px 28px}
       <h4>Contact</h4>
       483 West Bay Street<br>Nassau, New Providence, BS<br><br>
       <a href="tel:+12423276364">+1 (242) 327-6364</a><br>
-      <a href="/cdn-cgi/l/email-protection#80d4e8e5e9f3ece1eee4e7e1f2e4e5eeb2b4b2c0e7ede1e9ecaee3efed"><span class="__cf_email__" data-cfemail="7d291518140e111c13191a1c0f1918134f494f3d1a101c1411531e1210">[email&#160;protected]</span></a><br><br>
+      <a href="/cdn-cgi/l/email-protection#d286bab7bba1beb3bcb6b5b3a0b6b7bce0e6e092b5bfb3bbbefcb1bdbf"><span class="__cf_email__" data-cfemail="7d291518140e111c13191a1c0f1918134f494f3d1a101c1411531e1210">[email&#160;protected]</span></a><br><br>
       Check-in: 3:00 PM · Check-out: 12:00 PM
     </div>
   </div>
