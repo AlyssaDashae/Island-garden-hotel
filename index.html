@@ -39,7 +39,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;background:rgba(253,252,250,
 nav.scrolled{box-shadow:0 2px 24px rgba(0,0,0,.09)}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:var(--nav-h);max-width:1400px;margin:0 auto}
 .nav-logo{display:flex;align-items:center;gap:13px;text-decoration:none;flex-shrink:0}
-.nav-logo-img{width:56px;height:56px;border-radius:50%;object-fit:cover;flex-shrink:0;mix-blend-mode:multiply;background:#fff}
+.nav-logo-img{width:56px;height:56px;border-radius:50%;object-fit:cover;flex-shrink:0;background:transparent}
 .nav-logo-name{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:500;color:var(--ocean-deep);letter-spacing:.03em;display:block;line-height:1.2}
 .nav-logo-sub{font-size:.62rem;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:var(--text-light);display:block;margin-top:2px}
 .nav-links{display:flex;align-items:center;gap:28px}
@@ -335,7 +335,7 @@ footer{background:#141414;color:rgba(255,255,255,.5);padding:60px 48px 28px}
 @keyframes modalIn{from{opacity:0;transform:translateY(32px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}
 .modal-header{background:var(--ocean-deep);padding:20px 24px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
 .modal-header-left{display:flex;align-items:center;gap:12px}
-.modal-logo-img{width:44px;height:44px;border-radius:50%;object-fit:cover;mix-blend-mode:multiply;background:#fff}
+.modal-logo-img{width:44px;height:44px;border-radius:50%;object-fit:cover;flex-shrink:0;background:transparent}
 .modal-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:400;color:white;letter-spacing:.02em;line-height:1.2}
 .modal-subtitle{font-size:.6rem;color:rgba(255,255,255,.55);letter-spacing:.12em;text-transform:uppercase;margin-top:2px}
 .modal-close{background:rgba(255,255,255,.12);border:none;color:white;width:34px;height:34px;border-radius:50%;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;flex-shrink:0}
@@ -501,7 +501,7 @@ footer{background:#141414;color:rgba(255,255,255,.5);padding:60px 48px 28px}
           <div><span class="promo-code-label">Your Promo Code</span><span class="promo-code-val">LOCAL242</span></div>
           <div><span class="promo-copy-hint">📋 Tap to copy</span><span class="promo-copy-done">✓ Copied!</span></div>
         </div>
-        <a href="https://us2.cloudbeds.com/reservation/lPXE9c" target="_blank" rel="noopener" class="btn-coral" style="width:100%;justify-content:center;">Book This Rate →</a>
+        <a href="#" onclick="openPromoBooking('LOCAL242');return false;" class="btn-coral" style="width:100%;justify-content:center;">Book This Rate →</a>
         <p class="promo-expires">Valid ID required at check-in · Subject to availability</p>
       </div>
       <div class="promo-card reveal">
@@ -519,7 +519,7 @@ footer{background:#141414;color:rgba(255,255,255,.5);padding:60px 48px 28px}
           <div><span class="promo-code-label">Your Promo Code</span><span class="promo-code-val">EASTER2026</span></div>
           <div><span class="promo-copy-hint">📋 Tap to copy</span><span class="promo-copy-done">✓ Copied!</span></div>
         </div>
-        <a href="https://us2.cloudbeds.com/reservation/lPXE9c" target="_blank" rel="noopener" class="btn-coral" style="width:100%;justify-content:center;">Book This Rate →</a>
+        <a href="#" onclick="openPromoBooking('EASTER2026');return false;" class="btn-coral" style="width:100%;justify-content:center;">Book This Rate →</a>
         <p class="promo-expires">Easter season · Subject to availability · 2-night minimum</p>
       </div>
       <div class="promo-card reveal">
@@ -537,7 +537,7 @@ footer{background:#141414;color:rgba(255,255,255,.5);padding:60px 48px 28px}
           <div><span class="promo-code-label">Your Promo Code</span><span class="promo-code-val">BDAY242</span></div>
           <div><span class="promo-copy-hint">📋 Tap to copy</span><span class="promo-copy-done">✓ Copied!</span></div>
         </div>
-        <a href="https://us2.cloudbeds.com/reservation/lPXE9c" target="_blank" rel="noopener" class="btn-coral" style="width:100%;justify-content:center;">Book This Rate →</a>
+        <a href="#" onclick="openPromoBooking('BDAY242');return false;" class="btn-coral" style="width:100%;justify-content:center;">Book This Rate →</a>
         <p class="promo-expires">Valid ID / proof of birthday required · Subject to availability</p>
       </div>
     </div>
@@ -833,6 +833,26 @@ const PROMO_CODES={
 };
 const CB_BASE='https://us2.cloudbeds.com/reservation/lPXE9c';
 
+function buildCloudbedsUrl({ci,co,adults,children,coupon}){
+  const params=new URLSearchParams();
+  if(ci) params.set('checkin',ci);
+  if(co) params.set('checkout',co);
+  params.set('adults',adults);
+  if(parseInt(children,10)>0) params.set('children',children);
+  if(coupon){
+    params.set('promo',coupon);
+  }
+  return `${CB_BASE}?${params.toString()}`;
+}
+
+function openPromoBooking(code){
+  const ci=document.getElementById('checkin').value;
+  const co=document.getElementById('checkout').value;
+  const adults=document.getElementById('adults').value;
+  const children=document.getElementById('children').value;
+  window.open(buildCloudbedsUrl({ci,co,adults,children,coupon:code}),'_blank','noopener');
+}
+
 function fmtDate(d){return d.toISOString().split('T')[0]}
 const tom=new Date();tom.setDate(tom.getDate()+1);
 const co2=new Date(tom);co2.setDate(co2.getDate()+2);
@@ -845,11 +865,7 @@ function buildUrl(){
   const adults=document.getElementById('adults').value;
   const children=document.getElementById('children').value;
   const coupon=document.getElementById('coupon').value.trim().toUpperCase();
-  let url=(ci&&co)?`${CB_BASE}?checkin=${ci}&checkout=${co}`:CB_BASE;
-  url+=`&adults=${adults}`;
-  if(children>0) url+=`&children=${children}`;
-  if(coupon&&PROMO_CODES[coupon]) url+=`&coupon=${encodeURIComponent(coupon)}`;
-  return url;
+  return buildCloudbedsUrl({ci,co,adults,children,coupon});
 }
 
 const modal=document.getElementById('bookingModal');
@@ -867,11 +883,7 @@ function modalBuildUrl(){
   const adults=document.getElementById('m-adults').value;
   const children=document.getElementById('m-children').value;
   const coupon=document.getElementById('m-coupon').value.trim().toUpperCase();
-  let url=(ci&&co)?`${CB_BASE}?checkin=${ci}&checkout=${co}`:CB_BASE;
-  url+=`&adults=${adults}`;
-  if(parseInt(children)>0) url+=`&children=${children}`;
-  if(coupon&&PROMO_CODES[coupon]) url+=`&coupon=${encodeURIComponent(coupon)}`;
-  return url;
+  return buildCloudbedsUrl({ci,co,adults,children,coupon});
 }
 
 function updateModalSummary(){
@@ -897,6 +909,12 @@ function updateModalSummary(){
 }
 
 function openModal(){
+  const mainCoupon=document.getElementById('coupon').value.trim().toUpperCase();
+  const modalCouponInput=document.getElementById('m-coupon');
+  if(mainCoupon){
+    modalCouponInput.value=mainCoupon;
+    modalCouponInput.dispatchEvent(new Event('input'));
+  }
   modal.classList.add('open');
   document.body.style.overflow='hidden';
   updateModalSummary();
@@ -987,8 +1005,11 @@ function copyCode(el,code){
   const done=el.querySelector('.promo-copy-done');
   hint.style.display='none';done.style.display='block';
   const couponInput=document.getElementById('coupon');
+  const modalCouponInput=document.getElementById('m-coupon');
   couponInput.value=code;
   couponInput.dispatchEvent(new Event('input'));
+  modalCouponInput.value=code;
+  modalCouponInput.dispatchEvent(new Event('input'));
   setTimeout(()=>{hint.style.display='';done.style.display='none';},2500);
 }
 
